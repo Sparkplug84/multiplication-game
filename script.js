@@ -8,38 +8,36 @@ const nextQuestion = document.getElementById("nextQuestion");
 const multiply = document.getElementById("multiply");
 const divide = document.getElementById("divide");
 const symbol = document.getElementById("symbol");
-const tableChoices = document.getElementById("tableChoices");
-const keypad = document.getElementById("keypad");
+const multiplicationInput = document.getElementById("activateMultiplication");
+const divisionInput = document.getElementById("activateDivision");
+const tableChoiceInput = document.getElementById("tableChoices");
+const keypadContainer = document.getElementById("keypad");
+const questionNumberInput = document.getElementById("questionNumberList");
 
 let startGame = false;
-let currentCount = 1;
+let currentQuestionNumber = 1;
+let totalCorrectQuestions = 0;
 let multiplyQuestion = false;
 let divideQuestion = false;
 let multiplicationActive;
 let divisionActive;
 let chosenTables;
 let correctAnswer;
+let totalQuestions;
 
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const keypadNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-// const answers = [
-//   1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 18, 20, 21, 22, 24, 25, 27,
-//   30, 32, 33, 35, 36, 40, 42, 44, 45, 48, 49, 50, 54, 55, 56, 60, 63, 64, 66,
-//   70, 72, 77, 80, 81, 84, 88, 90, 96, 99, 100, 108, 110, 120, 121, 132, 144,
-// ];
+const amountOfQuestions = Array.from({ length: 100 }, (_, i) => i + 1);
 
 start.addEventListener("click", function () {
   runGame(chosenTables);
 });
 nextQuestion.addEventListener("click", function () {
-  checkAnswer(10, [1, 4, 5, 9]);
+  checkAnswer(totalQuestions);
 });
 deleteNumber.addEventListener("click", function () {
   changeAnswer();
 });
-// divide.addEventListener("click", function () {
-//   getDivisionQuestion([1, 4, 5, 9]);
-// });
 
 numbers.forEach((number) => {
   const tableOptions = `
@@ -47,12 +45,17 @@ numbers.forEach((number) => {
   <input class="table-choices" type="checkbox" id="table${number}" name="table-choices" value="${number}" />
   <label for="table${number}">x${number}</label>
   </div>`;
-  tableChoices.innerHTML += tableOptions;
+  tableChoiceInput.innerHTML += tableOptions;
 });
 
 keypadNumbers.forEach((number) => {
   const numberButtons = `<button value="${number}" onclick="selectNumber(${number})">${number}</button>`;
-  keypad.innerHTML += numberButtons;
+  keypadContainer.innerHTML += numberButtons;
+});
+
+amountOfQuestions.forEach((question) => {
+  const questionNumber = `<option value="${question}">${question}</option>`;
+  questionNumberInput.innerHTML += questionNumber;
 });
 
 function selectNumber(number) {
@@ -65,35 +68,32 @@ function changeAnswer() {
 }
 
 function getQuestionPrefrences() {
-  multiplicationActive = document.getElementById(
-    "activateMultiplication"
-  ).checked;
-  divisionActive = document.getElementById("activateDivision").checked;
+  multiplicationActive = multiplicationInput.checked;
+  divisionActive = divisionInput.checked;
   chosenTables = Array.from(
     document.querySelectorAll(
       "input[type=checkbox][name=table-choices]:checked"
     )
   ).map((elem) => elem.value);
-  console.log(chosenTables);
-  return multiplicationActive, divisionActive, chosenTables;
+  totalQuestions = questionNumberInput.value;
+  console.log(chosenTables, totalQuestions);
+  return multiplicationActive, divisionActive, chosenTables, totalQuestions;
 }
 
 function getRandomNumber() {
   return numbers[Math.floor(Math.random() * numbers.length)];
 }
 function getRandomAnswer() {
-  // return answers[Math.floor(Math.random() * answers.length)];
   return getRandomNumber() * getRandomNumber();
 }
 
-function getRandomTable(tablesChoice) {
-  return tablesChoice[Math.floor(Math.random() * tablesChoice.length)];
+function getRandomTable(chosenTables) {
+  return chosenTables[Math.floor(Math.random() * chosenTables.length)];
 }
 
 function runGame() {
   startGame = true;
   getQuestionPrefrences();
-  console.log(multiplicationActive, divisionActive);
   if (!multiplicationActive && !divisionActive) {
     alert("You must choose at least one option.");
     return;
@@ -108,7 +108,6 @@ function populateQuiz(chosenTables) {
 
 function getDivisionQuestion(tablesChoice) {
   divideQuestion = true;
-  console.log(divideQuestion ? "divide question" : null);
   function getRandomDivisibleAnswer(chosenTables) {
     const randomAnswer = getRandomAnswer();
     console.log(randomAnswer);
@@ -122,7 +121,6 @@ function getDivisionQuestion(tablesChoice) {
   }
   let result;
   while (!result) result = getRandomDivisibleAnswer(chosenTables);
-  console.log(result);
   firstNumber.innerText = result[0];
   secondNumber.innerText = result[1];
   symbol.innerText = "/";
@@ -133,7 +131,6 @@ function getDivisionQuestion(tablesChoice) {
 
 function getMultiplicationQuestion(chosenTables) {
   multiplyQuestion = true;
-  console.log(multiplyQuestion ? "multiply question" : null);
   const number1 = getRandomTable(chosenTables);
   const number2 = getRandomNumber();
   correctAnswer = number1 * number2;
@@ -141,7 +138,6 @@ function getMultiplicationQuestion(chosenTables) {
   secondNumber.innerText = number1;
   symbol.innerText = "X";
   thisAnswer.innerText = correctAnswer;
-  console.log(number1, number2, number1 * number2);
   return correctAnswer;
 }
 
@@ -153,20 +149,24 @@ function getRandomQuestion(chosenTables) {
   questionChoices[pickRandomQuestion](chosenTables);
 }
 
-function checkAnswer(questionCount, tablesChoice) {
-  if (currentCount < questionCount) {
-    console.log(correctAnswer, userAnswer.innerText);
-    correctAnswer == userAnswer.innerText
-      ? console.log("Correct")
-      : console.log("Incorrect");
-    multiplyQuestion = false;
-    divideQuestion = false;
-    // getQuestionPrefrences();
-    console.log(multiplicationActive, divisionActive);
-    populateQuiz(chosenTables);
-    currentCount++;
+function checkAnswer(totalQuestions) {
+  if (correctAnswer == userAnswer.innerText) {
+    console.log("Correct");
+    totalCorrectQuestions++;
   } else {
-    currentCount = 0;
+    console.log("Incorrect");
   }
-  console.log(currentCount, questionCount);
+  console.log(correctAnswer, userAnswer.innerText);
+  console.log(`You scored ${totalCorrectQuestions} out of ${totalQuestions}`);
+
+  if (currentQuestionNumber < totalQuestions) {
+    populateQuiz(chosenTables);
+    currentQuestionNumber++;
+  } else {
+    currentQuestionNumber = 0;
+  }
+  console.log(currentQuestionNumber, totalCorrectQuestions, totalQuestions);
+  userAnswer.innerText = null;
+  multiplyQuestion = false;
+  divideQuestion = false;
 }
