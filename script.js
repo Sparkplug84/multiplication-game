@@ -1,3 +1,4 @@
+// html elements
 const start = document.getElementById("startGame");
 const firstNumber = document.getElementById("number1");
 const secondNumber = document.getElementById("number2");
@@ -13,7 +14,12 @@ const divisionInput = document.getElementById("activateDivision");
 const tableChoiceInput = document.getElementById("tableChoices");
 const keypadContainer = document.getElementById("keypad");
 const questionNumberInput = document.getElementById("questionNumberList");
+const timeDisplay = document.querySelector("#timeDisplay");
+const startBtn = document.querySelector("#startBtn");
+const pauseBtn = document.querySelector("#pauseBtn");
+const resetBtn = document.querySelector("#resetBtn");
 
+// game variables
 let startGame = false;
 let currentQuestionNumber = 1;
 let totalCorrectQuestions = 0;
@@ -25,20 +31,38 @@ let chosenTables;
 let correctAnswer;
 let totalQuestions;
 
+// timer variables
+let minutes = 0;
+let seconds = 0;
+let hundredths = 0;
+let intervalId = null;
+
+// arrays
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const keypadNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const amountOfQuestions = Array.from({ length: 100 }, (_, i) => i + 1);
 
-start.addEventListener("click", function () {
+// event listeners for button clicks
+start.addEventListener("click", () => {
   runGame(chosenTables);
 });
-nextQuestion.addEventListener("click", function () {
+nextQuestion.addEventListener("click", () => {
   checkAnswer(totalQuestions);
 });
-deleteNumber.addEventListener("click", function () {
+deleteNumber.addEventListener("click", () => {
   changeAnswer();
 });
+startBtn.addEventListener("click", () => {
+  startTimer();
+});
+pauseBtn.addEventListener("click", () => {
+  pauseTimer();
+});
+resetBtn.addEventListener("click", () => {
+  resetTimer();
+});
 
+// iterating arrays to create html elements
 numbers.forEach((number) => {
   const tableOptions = `
   <div>
@@ -58,6 +82,7 @@ amountOfQuestions.forEach((question) => {
   questionNumberInput.innerHTML += questionNumber;
 });
 
+// game functions
 function selectNumber(number) {
   userAnswer.innerText += number;
 }
@@ -169,4 +194,43 @@ function checkAnswer(totalQuestions) {
   userAnswer.innerText = null;
   multiplyQuestion = false;
   divideQuestion = false;
+}
+
+// timer functions
+function startTimer() {
+  intervalId = setInterval(() => {
+    hundredths++;
+    if (hundredths === 100) {
+      hundredths = 0;
+      seconds++;
+    }
+    if (seconds === 60) {
+      seconds = 0;
+      minutes++;
+    }
+    const formattedTime = `${padNumber(minutes)}:${padNumber(
+      seconds
+    )}:${padNumber(hundredths)}`;
+    timeDisplay.innerText = formattedTime;
+  }, 10);
+}
+
+function pauseTimer() {
+  clearInterval(intervalId);
+  stoppedTime = `${padNumber(minutes)}:${padNumber(seconds)}:${padNumber(
+    hundredths
+  )}`;
+  console.log(`Timer stopped at ${stoppedTime}`);
+}
+
+function resetTimer() {
+  clearInterval(intervalId);
+  minutes = 0;
+  seconds = 0;
+  hundredths = 0;
+  timeDisplay.innerText = "00:00:00";
+}
+
+function padNumber(number) {
+  return number.toString().padStart(2, "0");
 }
