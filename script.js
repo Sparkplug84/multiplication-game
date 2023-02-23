@@ -1,4 +1,7 @@
 // html elements
+const landingPage = document.getElementById("landingPage");
+const quizPreferences = document.getElementById("quizPreferences");
+const quizContainer = document.getElementById("quizContainer");
 const start = document.getElementById("startGame");
 const firstNumber = document.getElementById("number1");
 const secondNumber = document.getElementById("number2");
@@ -18,8 +21,14 @@ const timeDisplay = document.querySelector("#timeDisplay");
 const startBtn = document.querySelector("#startBtn");
 const pauseBtn = document.querySelector("#pauseBtn");
 const resetBtn = document.querySelector("#resetBtn");
+const makeQuizBtn = document.querySelector("#makeQuiz");
+const mainMenuBtn = document.querySelector("#mainMenuBtn");
+const retryBtn = document.querySelector("#retryBtn");
+const finishQuizContainer = document.querySelector("#finishQuiz");
+const finishQuizMessage = document.querySelector("#finishQuizMessage");
+const quizFinishTime = document.querySelector("#quizFinishTime");
 
-// game variables
+// game variables --------------------------------------------
 let startGame = false;
 let currentQuestionNumber = 1;
 let totalCorrectQuestions = 0;
@@ -31,20 +40,35 @@ let chosenTables;
 let correctAnswer;
 let totalQuestions;
 
-// timer variables
+// timer variables -------------------------------------------
 let minutes = 0;
 let seconds = 0;
 let hundredths = 0;
 let intervalId = null;
 
-// arrays
+// arrays -----------------------------------------------------
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const keypadNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const amountOfQuestions = Array.from({ length: 100 }, (_, i) => i + 1);
 
-// event listeners for button clicks
+// event listeners for button clicks --------------------------
 start.addEventListener("click", () => {
-  runGame(chosenTables);
+  getQuestionPrefrences();
+  console.log(multiplicationActive, divisionActive, chosenTables);
+  if (
+    (chosenTables.length == 0 && !multiplicationActive) ||
+    (chosenTables.length == 0 && !divisionActive) ||
+    (chosenTables.length == 0 && multiplicationActive && divisionActive) ||
+    (!chosenTables.length == 0 && !multiplicationActive && !divisionActive)
+  ) {
+    alert("You must first choose your game preferences.");
+    console.log("if statement true");
+  } else {
+    quizPreferences.style.display = "none";
+    quizContainer.style.display = "block";
+    console.log("else statement true");
+    runGame();
+  }
 });
 nextQuestion.addEventListener("click", () => {
   checkAnswer(totalQuestions);
@@ -61,8 +85,23 @@ pauseBtn.addEventListener("click", () => {
 resetBtn.addEventListener("click", () => {
   resetTimer();
 });
+makeQuizBtn.addEventListener("click", () => {
+  landingPage.style.display = "none";
+  quizPreferences.style.display = "block";
+});
+mainMenuBtn.addEventListener("click", () => {
+  finishQuizContainer.style.display = "none";
+  landingPage.style.display = "block";
+  resetPlayerPreferences();
+});
+retryBtn.addEventListener("click", () => {
+  finishQuizContainer.style.display = "none";
+  quizContainer.style.display = "block";
+  runGame();
+  console.log("retry quiz");
+});
 
-// iterating arrays to create html elements
+// iterating arrays to create html elements -----------------------
 numbers.forEach((number) => {
   const tableOptions = `
   <div>
@@ -82,7 +121,7 @@ amountOfQuestions.forEach((question) => {
   questionNumberInput.innerHTML += questionNumber;
 });
 
-// game functions
+// game functions ----------------------------------------------
 function selectNumber(number) {
   userAnswer.innerText += number;
 }
@@ -118,11 +157,8 @@ function getRandomTable(chosenTables) {
 
 function runGame() {
   startGame = true;
-  getQuestionPrefrences();
-  if (!multiplicationActive && !divisionActive) {
-    alert("You must choose at least one option.");
-    return;
-  } else populateQuiz(chosenTables);
+  populateQuiz(chosenTables);
+  startTimer();
 }
 
 function populateQuiz(chosenTables) {
@@ -176,19 +212,20 @@ function getRandomQuestion(chosenTables) {
 
 function checkAnswer(totalQuestions) {
   if (correctAnswer == userAnswer.innerText) {
-    console.log("Correct");
     totalCorrectQuestions++;
-  } else {
-    console.log("Incorrect");
   }
-  console.log(correctAnswer, userAnswer.innerText);
-  console.log(`You scored ${totalCorrectQuestions} out of ${totalQuestions}`);
-
   if (currentQuestionNumber < totalQuestions) {
     populateQuiz(chosenTables);
     currentQuestionNumber++;
   } else {
-    currentQuestionNumber = 0;
+    pauseTimer();
+    quizContainer.style.display = "none";
+    finishQuizContainer.style.display = "block";
+    finishQuizMessage.innerText = `You scored ${totalCorrectQuestions} out of ${totalQuestions}`;
+    quizFinishTime.innerText = pauseTimer();
+    currentQuestionNumber = 1;
+    totalCorrectQuestions = 0;
+    resetTimer();
   }
   console.log(currentQuestionNumber, totalCorrectQuestions, totalQuestions);
   userAnswer.innerText = null;
@@ -196,7 +233,18 @@ function checkAnswer(totalQuestions) {
   divideQuestion = false;
 }
 
-// timer functions
+function resetPlayerPreferences() {
+  multiplicationInput.checked = false;
+  divisionInput.checked = false;
+  questionNumberInput.value = 1;
+  document
+    .querySelectorAll("input[type=checkbox][name=table-choices]:checked")
+    .forEach((item) => {
+      item.checked = false;
+    });
+}
+
+// timer functions ---------------------------------------------
 function startTimer() {
   intervalId = setInterval(() => {
     hundredths++;
@@ -220,7 +268,7 @@ function pauseTimer() {
   stoppedTime = `${padNumber(minutes)}:${padNumber(seconds)}:${padNumber(
     hundredths
   )}`;
-  console.log(`Timer stopped at ${stoppedTime}`);
+  return `Timer stopped at ${stoppedTime}`;
 }
 
 function resetTimer() {

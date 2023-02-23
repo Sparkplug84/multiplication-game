@@ -4,49 +4,72 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <title>Document</title>
   </head>
   <body>
-    <h1>Hello</h1>
-    <fieldset>
-      <legend>Question Type:</legend>
-      <div>
-        <input
-          type="checkbox"
-          id="activateMultiplication"
-          name="activateMultiplication"
-        />
-        <label for="activateMultiplication">Multiplication</label>
+    <div>
+      <div id="landingPage">
+        <h1>Welcome to the maths quiz</h1>
+        <button id="makeQuiz">Create a quiz</button>
+        <button id="howToPlay">How to play</button>
       </div>
-      <div>
-        <input type="checkbox" id="activateDivision" name="activateDivision" />
-        <label for="activateDivision">Division</label>
+
+      <div id="quizPreferences" class="quiz-preferences-container">
+        <fieldset>
+          <legend>Question Type:</legend>
+          <div>
+            <input
+              type="checkbox"
+              id="activateMultiplication"
+              name="activateMultiplication"
+            />
+            <label for="activateMultiplication">Multiplication</label>
+          </div>
+          <div>
+            <input
+              type="checkbox"
+              id="activateDivision"
+              name="activateDivision"
+            />
+            <label for="activateDivision">Division</label>
+          </div>
+        </fieldset>
+        <fieldset id="tableChoices">
+          <legend>Choose Tables:</legend>
+        </fieldset>
+        <fieldset>
+          <legend>Number of questions:</legend>
+          <select name="questionCount" id="questionNumberList"></select>
+        </fieldset>
+        <button id="startGame">Start</button>
       </div>
-    </fieldset>
-    <fieldset id="tableChoices">
-      <legend>Choose Tables:</legend>
-    </fieldset>
-    <fieldset>
-      <legend>Number of questions:</legend>
-      <select name="questionCount" id="questionNumberList"></select>
-    </fieldset>
-    <button id="startGame">Start</button>
-    <div id="timeContainer">
-      <div id="timeDisplay">00:00:00</div>
-      <button id="startBtn">Start</button>
-      <button id="pauseBtn">Pause</button>
-      <button id="resetBtn">Reset</button>
+
+      <div id="quizContainer">
+        <div id="timeContainer">
+          <div id="timeDisplay">00:00:00</div>
+          <button id="startBtn">Start</button>
+          <button id="pauseBtn">Pause</button>
+          <button id="resetBtn">Reset</button>
+        </div>
+        <p id="number1"></p>
+        <p id="symbol"></p>
+        <p id="number2"></p>
+        <p id="answer"></p>
+        <p id="userAnswer"></p>
+        <button id="deleteNumber">Delete Number</button>
+        <!-- <button id="multiply">Multiply</button>
+        <button id="divide">Divide</button> -->
+        <button id="nextQuestion">Next</button>
+        <div id="keypad"></div>
+      </div>
+      <div id="finishQuiz">
+        <p id="finishQuizMessage"></p>
+        <p id="quizFinishTime"></p>
+        <button id="retryBtn">Try Again</button>
+        <button id="mainMenuBtn">MainMenu</button>
+      </div>
     </div>
-    <p id="number1"></p>
-    <p id="symbol"></p>
-    <p id="number2"></p>
-    <p id="answer"></p>
-    <p id="userAnswer"></p>
-    <button id="deleteNumber">Delete Number</button>
-    <!-- <button id="multiply">Multiply</button>
-    <button id="divide">Divide</button> -->
-    <button id="nextQuestion">Next Question</button>
-    <div id="keypad"></div>
     <script src="script.js"></script>
   </body>
 </html>
