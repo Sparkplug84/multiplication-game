@@ -2,4 +2,4 @@
 
 An app for kids to practice their times tables and dividing tables.
 
-View the live app at [Math game](https://sparkplug84.github.io/multiplication-game/)
+View the live app at [Maths game](https://sparkplug84.github.io/multiplication-game/)

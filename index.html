@@ -10,9 +10,28 @@
   <body>
     <div>
       <div id="landingPage">
-        <h1>Welcome to the maths quiz</h1>
-        <button id="makeQuiz">Create a quiz</button>
-        <button id="howToPlay">How to play</button>
+        <div class="landing__container">
+          <div class="landing__hero">
+            <h1 class="landing__title">Welcome to the maths quiz</h1>
+            <div class="landing__image-container">
+              <img
+                class="landing__image"
+                src="https://live.staticflickr.com/65535/52708368467_eacec1dbc0_z.jpg"
+                alt=""
+              />
+            </div>
+          </div>
+          <div class="landing__button-container">
+            <button id="makeQuiz" class="btn primary-btn">
+              <p>Create a quiz</p>
+              <img class="btn-icon" src="./icons/Create.svg" alt="" />
+            </button>
+            <button id="howToPlay" class="btn secondary-btn">
+              <p>How to play</p>
+              <img class="btn-icon" src="./icons/Question Mark.svg" alt="" />
+            </button>
+          </div>
+        </div>
       </div>
 
       <div id="quizPreferences" class="quiz-preferences-container">
@@ -48,14 +67,14 @@
       <div id="quizContainer">
         <div id="timeContainer">
           <div id="timeDisplay">00:00:00</div>
-          <button id="startBtn">Start</button>
+          <!-- <button id="startBtn">Start</button>
           <button id="pauseBtn">Pause</button>
-          <button id="resetBtn">Reset</button>
+          <button id="resetBtn">Reset</button> -->
         </div>
         <p id="number1"></p>
         <p id="symbol"></p>
         <p id="number2"></p>
-        <p id="answer"></p>
+        <!-- <p id="answer"></p> -->
         <p id="userAnswer"></p>
         <button id="deleteNumber">Delete Number</button>
         <!-- <button id="multiply">Multiply</button>
