@@ -5,7 +5,7 @@ const quizContainer = document.getElementById("quizContainer");
 const start = document.getElementById("startGame");
 const firstNumber = document.getElementById("number1");
 const secondNumber = document.getElementById("number2");
-const thisAnswer = document.getElementById("answer");
+// const thisAnswer = document.getElementById("answer");
 const userAnswer = document.getElementById("userAnswer");
 const deleteNumber = document.getElementById("deleteNumber");
 const nextQuestion = document.getElementById("nextQuestion");
@@ -18,9 +18,9 @@ const tableChoiceInput = document.getElementById("tableChoices");
 const keypadContainer = document.getElementById("keypad");
 const questionNumberInput = document.getElementById("questionNumberList");
 const timeDisplay = document.querySelector("#timeDisplay");
-const startBtn = document.querySelector("#startBtn");
-const pauseBtn = document.querySelector("#pauseBtn");
-const resetBtn = document.querySelector("#resetBtn");
+// const startBtn = document.querySelector("#startBtn");
+// const pauseBtn = document.querySelector("#pauseBtn");
+// const resetBtn = document.querySelector("#resetBtn");
 const makeQuizBtn = document.querySelector("#makeQuiz");
 const mainMenuBtn = document.querySelector("#mainMenuBtn");
 const retryBtn = document.querySelector("#retryBtn");
@@ -76,15 +76,15 @@ nextQuestion.addEventListener("click", () => {
 deleteNumber.addEventListener("click", () => {
   changeAnswer();
 });
-startBtn.addEventListener("click", () => {
-  startTimer();
-});
-pauseBtn.addEventListener("click", () => {
-  pauseTimer();
-});
-resetBtn.addEventListener("click", () => {
-  resetTimer();
-});
+// startBtn.addEventListener("click", () => {
+//   startTimer();
+// });
+// pauseBtn.addEventListener("click", () => {
+//   pauseTimer();
+// });
+// resetBtn.addEventListener("click", () => {
+//   resetTimer();
+// });
 makeQuizBtn.addEventListener("click", () => {
   landingPage.style.display = "none";
   quizPreferences.style.display = "block";
@@ -186,7 +186,7 @@ function getDivisionQuestion(tablesChoice) {
   secondNumber.innerText = result[1];
   symbol.innerText = "/";
   correctAnswer = result[0] / result[1];
-  thisAnswer.innerText = correctAnswer;
+  // thisAnswer.innerText = correctAnswer;
   return result, correctAnswer;
 }
 
@@ -198,7 +198,7 @@ function getMultiplicationQuestion(chosenTables) {
   firstNumber.innerText = number2;
   secondNumber.innerText = number1;
   symbol.innerText = "X";
-  thisAnswer.innerText = correctAnswer;
+  // thisAnswer.innerText = correctAnswer;
   return correctAnswer;
 }
 
