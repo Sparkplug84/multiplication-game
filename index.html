@@ -8,7 +8,7 @@
     <title>Document</title>
   </head>
   <body>
-    <div>
+    <div class="app">
       <div id="landingPage">
         <div class="landing__container">
           <div class="landing__hero">
@@ -24,7 +24,6 @@
           <div class="landing__button-container">
             <button id="makeQuiz" class="btn primary-btn">
               <p>Create a quiz</p>
-              <img class="btn-icon" src="./icons/Create.svg" alt="" />
             </button>
             <button id="howToPlay" class="btn secondary-btn">
               <p>How to play</p>
@@ -61,7 +60,8 @@
           <legend>Number of questions:</legend>
           <select name="questionCount" id="questionNumberList"></select>
         </fieldset>
-        <button id="startGame">Start</button>
+        <button id="startGame" class="btn primary-btn">Start quiz</button>
+        <button id="backToMenu" class="btn secondary-btn">Back</button>
       </div>
 
       <div id="quizContainer">
@@ -82,11 +82,17 @@
         <button id="nextQuestion">Next</button>
         <div id="keypad"></div>
       </div>
+
       <div id="finishQuiz">
         <p id="finishQuizMessage"></p>
         <p id="quizFinishTime"></p>
         <button id="retryBtn">Try Again</button>
         <button id="mainMenuBtn">MainMenu</button>
+        <button id="reviewQuestionsBtn">Review Questions</button>
+      </div>
+
+      <div id="reviewContainer" class="app__modal">
+        <div id="reviewQuestionsContainer" class="review__questions"></div>
       </div>
     </div>
     <script src="script.js"></script>

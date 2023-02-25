@@ -24,9 +24,12 @@ const timeDisplay = document.querySelector("#timeDisplay");
 const makeQuizBtn = document.querySelector("#makeQuiz");
 const mainMenuBtn = document.querySelector("#mainMenuBtn");
 const retryBtn = document.querySelector("#retryBtn");
+const reviewQuestionsBtn = document.querySelector("#reviewQuestionsBtn");
+const backToMenu = document.querySelector("#backToMenu");
 const finishQuizContainer = document.querySelector("#finishQuiz");
 const finishQuizMessage = document.querySelector("#finishQuizMessage");
 const quizFinishTime = document.querySelector("#quizFinishTime");
+const reviewContainer = document.querySelector("#reviewContainer");
 
 // game variables --------------------------------------------
 let startGame = false;
@@ -89,6 +92,10 @@ makeQuizBtn.addEventListener("click", () => {
   landingPage.style.display = "none";
   quizPreferences.style.display = "block";
 });
+backToMenu.addEventListener("click", () => {
+  landingPage.style.display = "block";
+  quizPreferences.style.display = "none";
+});
 mainMenuBtn.addEventListener("click", () => {
   finishQuizContainer.style.display = "none";
   landingPage.style.display = "block";
@@ -99,6 +106,10 @@ retryBtn.addEventListener("click", () => {
   quizContainer.style.display = "block";
   runGame();
   console.log("retry quiz");
+});
+reviewQuestionsBtn.addEventListener("click", () => {
+  finishQuizContainer.style.display = "none";
+  reviewContainer.style.display = "block";
 });
 
 // iterating arrays to create html elements -----------------------
@@ -211,6 +222,7 @@ function getRandomQuestion(chosenTables) {
 }
 
 function checkAnswer(totalQuestions) {
+  saveQuestion();
   if (correctAnswer == userAnswer.innerText) {
     totalCorrectQuestions++;
   }
@@ -231,6 +243,11 @@ function checkAnswer(totalQuestions) {
   userAnswer.innerText = null;
   multiplyQuestion = false;
   divideQuestion = false;
+}
+
+function saveQuestion() {
+  const currentQuestion = `<p>${firstNumber.innerText} ${symbol.innerText} ${secondNumber.innerText} = ${correctAnswer}</p>`;
+  reviewQuestionsContainer.innerHTML += currentQuestion;
 }
 
 function resetPlayerPreferences() {
