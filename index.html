@@ -34,9 +34,10 @@
         </div>
       </div>
 
-      <div id="quizPreferences" class="quiz-preferences-container">
-        <fieldset>
-          <legend>Question Type:</legend>
+      <div id="quizPreferences" class="quiz__preferences-container">
+        <h3 class="quiz__preferences-title">Choose your preferences</h3>
+        <div class="quiz__preferences-section">
+          <h4>Question Type:</h4>
           <div>
             <input
               type="checkbox"
@@ -53,19 +54,19 @@
             />
             <label for="activateDivision">Division</label>
           </div>
-        </fieldset>
-        <fieldset id="tableChoices">
-          <legend>Choose Tables:</legend>
-        </fieldset>
-        <fieldset>
-          <legend>Number of questions:</legend>
+        </div>
+        <div id="tableChoices" class="quiz__preferences-section">
+          <h4>Choose Tables:</h4>
+        </div>
+        <div class="quiz__preferences-section">
+          <h4>Number of questions:</h4>
           <select name="questionCount" id="questionNumberList"></select>
-        </fieldset>
+        </div>
         <button id="startGame" class="btn primary-btn">Start quiz</button>
         <button id="backToMenu" class="btn secondary-btn">Back</button>
       </div>
 
-      <div id="quizContainer">
+      <div id="quizContainer" class="quiz__container">
         <div id="timeContainer">
           <div id="timeDisplay">00:00:00</div>
           <!-- <button id="startBtn">Start</button>
@@ -80,8 +81,8 @@
         <button id="deleteNumber">Delete Number</button>
         <!-- <button id="multiply">Multiply</button>
         <button id="divide">Divide</button> -->
-        <button id="nextQuestion">Next</button>
-        <div id="keypad"></div>
+        <button id="nextQuestion" class="quiz__container-next">Next</button>
+        <div id="keypad" class="keypad__container"></div>
       </div>
 
       <div id="finishQuiz">

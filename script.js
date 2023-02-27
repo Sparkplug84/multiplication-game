@@ -51,7 +51,7 @@ let intervalId = null;
 
 // arrays -----------------------------------------------------
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-const keypadNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+const keypadNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "X"];
 const amountOfQuestions = Array.from({ length: 100 }, (_, i) => i + 1);
 
 // event listeners for button clicks --------------------------
@@ -68,6 +68,7 @@ start.addEventListener("click", () => {
     console.log("if statement true");
   } else {
     quizPreferences.style.display = "none";
+    quizPreferences.style.transform = "translateX(150%)";
     quizContainer.style.display = "block";
     console.log("else statement true");
     runGame();
@@ -89,27 +90,27 @@ deleteNumber.addEventListener("click", () => {
 //   resetTimer();
 // });
 makeQuizBtn.addEventListener("click", () => {
-  landingPage.style.display = "none";
-  quizPreferences.style.display = "block";
+  landingPage.style.transform = "translateX(-150%)";
+  quizPreferences.style.transform = "translateX(0)";
 });
 backToMenu.addEventListener("click", () => {
-  landingPage.style.display = "block";
-  quizPreferences.style.display = "none";
+  landingPage.style.transform = "translateX(0)";
+  quizPreferences.style.transform = "translateX(150%)";
 });
 mainMenuBtn.addEventListener("click", () => {
-  finishQuizContainer.style.display = "none";
-  landingPage.style.display = "block";
+  finishQuizContainer.style.transform = "none";
+  landingPage.style.transform = "block";
   resetPlayerPreferences();
 });
 retryBtn.addEventListener("click", () => {
-  finishQuizContainer.style.display = "none";
-  quizContainer.style.display = "block";
+  finishQuizContainer.style.transform = "none";
+  quizContainer.style.transform = "block";
   runGame();
   console.log("retry quiz");
 });
 reviewQuestionsBtn.addEventListener("click", () => {
-  finishQuizContainer.style.display = "none";
-  reviewContainer.style.display = "block";
+  finishQuizContainer.style.transform = "none";
+  reviewContainer.style.transform = "block";
 });
 
 // iterating arrays to create html elements -----------------------
@@ -123,7 +124,7 @@ numbers.forEach((number) => {
 });
 
 keypadNumbers.forEach((number) => {
-  const numberButtons = `<button value="${number}" onclick="selectNumber(${number})">${number}</button>`;
+  const numberButtons = `<button class="keypad__number" value="${number}" onclick="selectNumber(${number})">${number}</button>`;
   keypadContainer.innerHTML += numberButtons;
 });
 
