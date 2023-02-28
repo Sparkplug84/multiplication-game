@@ -7,6 +7,7 @@
 }
 
 .app {
+  position: fixed;
   font-family: "Cabin";
   height: 100vh;
   width: 100vw;
@@ -21,15 +22,16 @@
   );
 }
 
-#quizPreferences {
+#quizPreferences,
+#finishQuiz {
   position: absolute;
   transform: translateX(150%);
-  transition: transform 0.8s ease;
+  transition: transform 0.8s ease-in-out;
 }
 #reviewContainer,
-#quizContainer,
-#finishQuiz {
+#quizContainer {
   display: none;
+  transition: transform 0.8s ease-in-out;
 }
 
 /* #quizPreferences {
@@ -41,7 +43,7 @@
 #landingPage {
   position: absolute;
   transform: translateX(0);
-  transition: transform 0.8s ease;
+  transition: transform 0.8s ease-in-out;
 }
 
 .landing__container {
@@ -164,6 +166,28 @@
 
 .quiz__container {
   width: 80%;
+  height: 90%;
+  position: relative;
+}
+
+.quiz__container-progress {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#quizProgress {
+  width: 100%;
+}
+
+.quiz__container-sum {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.quiz__container-buttons {
+  position: absolute;
+  bottom: 0;
 }
 
 .quiz__container-next {

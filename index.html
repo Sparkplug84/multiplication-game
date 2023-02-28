@@ -73,16 +73,25 @@
           <button id="pauseBtn">Pause</button>
           <button id="resetBtn">Reset</button> -->
         </div>
-        <p id="number1"></p>
-        <p id="symbol"></p>
-        <p id="number2"></p>
-        <!-- <p id="answer"></p> -->
-        <p id="userAnswer"></p>
+        <div class="quiz__container-progress">
+          <p id="quizProgressTitle">Question 1 of 4</p>
+          <progress id="quizProgress" value="0" max="100"></progress>
+        </div>
+
+        <div class="quiz__container-sum">
+          <p id="number1"></p>
+          <p id="symbol"></p>
+          <p id="number2"></p>
+          <!-- <p id="answer"></p> -->
+          <p id="userAnswer"></p>
+        </div>
         <button id="deleteNumber">Delete Number</button>
         <!-- <button id="multiply">Multiply</button>
         <button id="divide">Divide</button> -->
-        <button id="nextQuestion" class="quiz__container-next">Next</button>
-        <div id="keypad" class="keypad__container"></div>
+        <div class="quiz__container-buttons">
+          <button id="nextQuestion" class="quiz__container-next">Next</button>
+          <div id="keypad" class="keypad__container"></div>
+        </div>
       </div>
 
       <div id="finishQuiz">

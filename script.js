@@ -30,6 +30,8 @@ const finishQuizContainer = document.querySelector("#finishQuiz");
 const finishQuizMessage = document.querySelector("#finishQuizMessage");
 const quizFinishTime = document.querySelector("#quizFinishTime");
 const reviewContainer = document.querySelector("#reviewContainer");
+const quizProgress = document.querySelector("#quizProgress");
+const quizProgressTitle = document.querySelector("#quizProgressTitle");
 
 // game variables --------------------------------------------
 let startGame = false;
@@ -98,13 +100,17 @@ backToMenu.addEventListener("click", () => {
   quizPreferences.style.transform = "translateX(150%)";
 });
 mainMenuBtn.addEventListener("click", () => {
-  finishQuizContainer.style.transform = "none";
-  landingPage.style.transform = "block";
+  finishQuizContainer.style.transform = "translateX(150%)";
+  landingPage.style.transform = "translateX(0)";
+  quizPreferences.style.display = "flex";
+  quizContainer.style.display = "none";
+  quizContainer.style.transform = "translateX(0)";
+
   resetPlayerPreferences();
 });
 retryBtn.addEventListener("click", () => {
-  finishQuizContainer.style.transform = "none";
-  quizContainer.style.transform = "block";
+  finishQuizContainer.style.transform = "translateX(150%)";
+  quizContainer.style.transform = "translateX(0)";
   runGame();
   console.log("retry quiz");
 });
@@ -168,12 +174,14 @@ function getRandomTable(chosenTables) {
 }
 
 function runGame() {
+  quizProgress.value = 0;
   startGame = true;
   populateQuiz(chosenTables);
   startTimer();
 }
 
 function populateQuiz(chosenTables) {
+  quizProgressTitle.innerText = `Question ${currentQuestionNumber} of ${totalQuestions}`;
   if (multiplicationActive && divisionActive) getRandomQuestion(chosenTables);
   else if (multiplicationActive) getMultiplicationQuestion(chosenTables);
   else getDivisionQuestion(chosenTables);
@@ -228,17 +236,22 @@ function checkAnswer(totalQuestions) {
     totalCorrectQuestions++;
   }
   if (currentQuestionNumber < totalQuestions) {
-    populateQuiz(chosenTables);
     currentQuestionNumber++;
+    populateQuiz(chosenTables);
+    quizProgress.value = ((currentQuestionNumber - 1) / totalQuestions) * 100;
   } else {
+    quizProgress.value = 100;
     pauseTimer();
-    quizContainer.style.display = "none";
-    finishQuizContainer.style.display = "block";
+    quizContainer.style.transform = "translateX(-150%)";
+    finishQuizContainer.style.transform = "translateX(0)";
     finishQuizMessage.innerText = `You scored ${totalCorrectQuestions} out of ${totalQuestions}`;
     quizFinishTime.innerText = pauseTimer();
     currentQuestionNumber = 1;
     totalCorrectQuestions = 0;
     resetTimer();
+  }
+  if (currentQuestionNumber == totalQuestions) {
+    nextQuestion.innerText = "Finish";
   }
   console.log(currentQuestionNumber, totalCorrectQuestions, totalQuestions);
   userAnswer.innerText = null;
