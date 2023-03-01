@@ -176,8 +176,21 @@
   align-items: center;
 }
 
-#quizProgress {
+/* #quizProgress {
   width: 100%;
+} */
+
+.progress__bar-container {
+  width: 100%;
+  height: 20px;
+  background-color: gray;
+}
+
+.progress__bar {
+  width: 0;
+  height: 20px;
+  background-color: blue;
+  transition: width 0.5s ease;
 }
 
 .quiz__container-sum {
@@ -200,6 +213,7 @@
   height: 50px;
   font-size: large;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: all 0.3s;
 }
 
 .keypad__container {
@@ -223,4 +237,11 @@
   font-size: large;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border: none;
+  transition: all 0.3s;
+}
+
+.keypad__number:active,
+.quiz__container-next:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
 }

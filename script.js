@@ -30,8 +30,9 @@ const finishQuizContainer = document.querySelector("#finishQuiz");
 const finishQuizMessage = document.querySelector("#finishQuizMessage");
 const quizFinishTime = document.querySelector("#quizFinishTime");
 const reviewContainer = document.querySelector("#reviewContainer");
-const quizProgress = document.querySelector("#quizProgress");
+// const quizProgress = document.querySelector("#quizProgress");
 const quizProgressTitle = document.querySelector("#quizProgressTitle");
+const progressBar = document.querySelector(".progress__bar");
 
 // game variables --------------------------------------------
 let startGame = false;
@@ -55,6 +56,12 @@ let intervalId = null;
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const keypadNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "X"];
 const amountOfQuestions = Array.from({ length: 100 }, (_, i) => i + 1);
+
+window.onload = function () {
+  setTimeout(function () {
+    window.scrollTo(0, 1);
+  }, 0);
+};
 
 // event listeners for button clicks --------------------------
 start.addEventListener("click", () => {
@@ -174,7 +181,9 @@ function getRandomTable(chosenTables) {
 }
 
 function runGame() {
-  quizProgress.value = 0;
+  // quizProgress.value = 0;
+  progressBar.style.width = 0;
+  nextQuestion.innerText = "Next";
   startGame = true;
   populateQuiz(chosenTables);
   startTimer();
@@ -238,9 +247,14 @@ function checkAnswer(totalQuestions) {
   if (currentQuestionNumber < totalQuestions) {
     currentQuestionNumber++;
     populateQuiz(chosenTables);
-    quizProgress.value = ((currentQuestionNumber - 1) / totalQuestions) * 100;
+    // quizProgress.value = ((currentQuestionNumber - 1) / totalQuestions) * 100;
+    progressBar.style.width = `${
+      ((currentQuestionNumber - 1) / totalQuestions) * 100
+    }%`;
+    console.log(progressBar.style.width);
   } else {
-    quizProgress.value = 100;
+    // quizProgress.value = 100;
+    progressBar.style.width = "100%";
     pauseTimer();
     quizContainer.style.transform = "translateX(-150%)";
     finishQuizContainer.style.transform = "translateX(0)";
