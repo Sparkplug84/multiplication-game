@@ -237,11 +237,32 @@
   font-size: large;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   border: none;
-  transition: all 0.3s;
+  transition: all 0.2s;
 }
 
 .keypad__number:active,
 .quiz__container-next:active {
-  transform: scale(0.95);
+  transform: scale(0.9);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+#countdownTimerContainer {
+  display: none;
+  transition: transform 0.8s ease-in-out;
+}
+
+@keyframes fadeout-timer {
+  0%,
+  25% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.timer {
+  font-size: 48px;
+  color: #fff;
+  animation: fadeout-timer 1s ease-out forwards 3;
 }
