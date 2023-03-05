@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="manifest" href="/manifest.json" /> -->
     <link rel="stylesheet" href="style.css" />
     <title>Document</title>
   </head>
@@ -23,11 +24,9 @@
             </div>
           </div>
           <div class="landing__button-container">
-            <button id="makeQuiz" class="btn primary-btn">
-              <p>Create a quiz</p>
-            </button>
+            <button id="makeQuiz" class="btn primary-btn">Create a quiz</button>
             <button id="howToPlay" class="btn secondary-btn">
-              <p>How to play</p>
+              How to play
               <img class="btn-icon" src="./icons/Question Mark.svg" alt="" />
             </button>
           </div>
@@ -105,9 +104,11 @@
       <div id="finishQuiz">
         <p id="finishQuizMessage"></p>
         <p id="quizFinishTime"></p>
-        <button id="retryBtn">Try Again</button>
-        <button id="mainMenuBtn">MainMenu</button>
-        <button id="reviewQuestionsBtn">Review Questions</button>
+        <button id="retryBtn" class="btn primary-btn">Try Again</button>
+        <button id="mainMenuBtn" class="btn primary-btn">MainMenu</button>
+        <button id="reviewQuestionsBtn" class="btn secondary-btn">
+          Review Questions
+        </button>
       </div>
 
       <div id="reviewContainer" class="app__modal">
