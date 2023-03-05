@@ -33,6 +33,10 @@ const reviewContainer = document.querySelector("#reviewContainer");
 // const quizProgress = document.querySelector("#quizProgress");
 const quizProgressTitle = document.querySelector("#quizProgressTitle");
 const progressBar = document.querySelector(".progress__bar");
+const countdownTimer = document.querySelector("#countdownTimer");
+const countdownTimerContainer = document.querySelector(
+  "#countdownTimerContainer"
+);
 
 // game variables --------------------------------------------
 let startGame = false;
@@ -66,7 +70,6 @@ window.onload = function () {
 // event listeners for button clicks --------------------------
 start.addEventListener("click", () => {
   getQuestionPrefrences();
-  console.log(multiplicationActive, divisionActive, chosenTables);
   if (
     (chosenTables.length == 0 && !multiplicationActive) ||
     (chosenTables.length == 0 && !divisionActive) ||
@@ -74,13 +77,12 @@ start.addEventListener("click", () => {
     (!chosenTables.length == 0 && !multiplicationActive && !divisionActive)
   ) {
     alert("You must first choose your game preferences.");
-    console.log("if statement true");
   } else {
-    quizPreferences.style.display = "none";
-    quizPreferences.style.transform = "translateX(150%)";
-    quizContainer.style.display = "block";
-    console.log("else statement true");
-    runGame();
+    addElement(countdownTimerContainer);
+    startCountdown(3);
+    slideLeft(quizPreferences);
+    removeElement(quizPreferences);
+    setTimeout(runGame, 3000);
   }
 });
 nextQuestion.addEventListener("click", () => {
@@ -99,31 +101,36 @@ deleteNumber.addEventListener("click", () => {
 //   resetTimer();
 // });
 makeQuizBtn.addEventListener("click", () => {
-  landingPage.style.transform = "translateX(-150%)";
-  quizPreferences.style.transform = "translateX(0)";
+  slideLeft(landingPage);
+  if ((quizPreferences.style.visibility = "hidden")) {
+    quizPreferences.style.visibility = "visible";
+  }
+  slideCentre(quizPreferences);
 });
 backToMenu.addEventListener("click", () => {
-  landingPage.style.transform = "translateX(0)";
-  quizPreferences.style.transform = "translateX(150%)";
+  slideCentre(landingPage);
+  slideRight(quizPreferences);
 });
 mainMenuBtn.addEventListener("click", () => {
-  finishQuizContainer.style.transform = "translateX(150%)";
-  landingPage.style.transform = "translateX(0)";
-  quizPreferences.style.display = "flex";
-  quizContainer.style.display = "none";
-  quizContainer.style.transform = "translateX(0)";
+  slideRight(finishQuizContainer);
+  slideCentre(landingPage);
+  removeElement(quizContainer);
+  slideCentre(quizContainer);
+  quizPreferences.style.visibility = "hidden";
+  slideRight(quizPreferences);
 
   resetPlayerPreferences();
 });
 retryBtn.addEventListener("click", () => {
-  finishQuizContainer.style.transform = "translateX(150%)";
-  quizContainer.style.transform = "translateX(0)";
-  runGame();
-  console.log("retry quiz");
+  slideRight(finishQuizContainer);
+  addElement(quizPreferences);
+  slideCentre(quizPreferences);
+  removeElement(quizContainer);
+  slideCentre(quizContainer);
 });
 reviewQuestionsBtn.addEventListener("click", () => {
-  finishQuizContainer.style.transform = "none";
-  reviewContainer.style.transform = "block";
+  removeElement(finishQuizContainer);
+  addElement(reviewContainer);
 });
 
 // iterating arrays to create html elements -----------------------
@@ -147,6 +154,25 @@ amountOfQuestions.forEach((question) => {
 });
 
 // game functions ----------------------------------------------
+
+function startCountdown(seconds) {
+  let counter = seconds;
+  countdownTimer.innerText = counter;
+
+  countdownTimer.classList.add("timer");
+
+  const interval = setInterval(() => {
+    console.log(counter);
+    counter--;
+    countdownTimer.innerText = counter;
+
+    if (counter < 0) {
+      clearInterval(interval);
+      console.log("Ding!");
+    }
+  }, 1000);
+}
+
 function selectNumber(number) {
   userAnswer.innerText += number;
 }
@@ -165,7 +191,6 @@ function getQuestionPrefrences() {
     )
   ).map((elem) => elem.value);
   totalQuestions = questionNumberInput.value;
-  console.log(chosenTables, totalQuestions);
   return multiplicationActive, divisionActive, chosenTables, totalQuestions;
 }
 
@@ -181,9 +206,12 @@ function getRandomTable(chosenTables) {
 }
 
 function runGame() {
-  // quizProgress.value = 0;
+  addElement(quizContainer);
+  removeElement(countdownTimerContainer);
   progressBar.style.width = 0;
-  nextQuestion.innerText = "Next";
+  currentQuestionNumber < totalQuestions
+    ? (nextQuestion.innerText = "Next")
+    : (nextQuestion.innerText = "Finish");
   startGame = true;
   populateQuiz(chosenTables);
   startTimer();
@@ -200,7 +228,6 @@ function getDivisionQuestion(tablesChoice) {
   divideQuestion = true;
   function getRandomDivisibleAnswer(chosenTables) {
     const randomAnswer = getRandomAnswer();
-    console.log(randomAnswer);
     const randomTable = getRandomTable(chosenTables);
     if (randomAnswer % randomTable === 0)
       if (randomAnswer / randomTable > 12) return;
@@ -215,7 +242,6 @@ function getDivisionQuestion(tablesChoice) {
   secondNumber.innerText = result[1];
   symbol.innerText = "/";
   correctAnswer = result[0] / result[1];
-  // thisAnswer.innerText = correctAnswer;
   return result, correctAnswer;
 }
 
@@ -227,7 +253,6 @@ function getMultiplicationQuestion(chosenTables) {
   firstNumber.innerText = number2;
   secondNumber.innerText = number1;
   symbol.innerText = "X";
-  // thisAnswer.innerText = correctAnswer;
   return correctAnswer;
 }
 
@@ -247,30 +272,29 @@ function checkAnswer(totalQuestions) {
   if (currentQuestionNumber < totalQuestions) {
     currentQuestionNumber++;
     populateQuiz(chosenTables);
-    // quizProgress.value = ((currentQuestionNumber - 1) / totalQuestions) * 100;
     progressBar.style.width = `${
       ((currentQuestionNumber - 1) / totalQuestions) * 100
     }%`;
-    console.log(progressBar.style.width);
   } else {
-    // quizProgress.value = 100;
     progressBar.style.width = "100%";
     pauseTimer();
-    quizContainer.style.transform = "translateX(-150%)";
-    finishQuizContainer.style.transform = "translateX(0)";
+    slideLeft(quizContainer);
+    slideCentre(finishQuizContainer);
     finishQuizMessage.innerText = `You scored ${totalCorrectQuestions} out of ${totalQuestions}`;
     quizFinishTime.innerText = pauseTimer();
     currentQuestionNumber = 1;
     totalCorrectQuestions = 0;
     resetTimer();
+    removeElement(quizPreferences);
+    slideLeft(quizPreferences);
   }
   if (currentQuestionNumber == totalQuestions) {
     nextQuestion.innerText = "Finish";
   }
-  console.log(currentQuestionNumber, totalCorrectQuestions, totalQuestions);
   userAnswer.innerText = null;
   multiplyQuestion = false;
   divideQuestion = false;
+  addElement(quizPreferences);
 }
 
 function saveQuestion() {
@@ -287,6 +311,23 @@ function resetPlayerPreferences() {
     .forEach((item) => {
       item.checked = false;
     });
+}
+
+// element movement functions ----------------------------
+function slideLeft(element) {
+  element.style.transform = "translateX(-150%)";
+}
+function slideRight(element) {
+  element.style.transform = "translateX(150%)";
+}
+function slideCentre(element) {
+  element.style.transform = "translateX(0)";
+}
+function removeElement(element) {
+  element.style.display = "none";
+}
+function addElement(element) {
+  element.style.display = "block";
 }
 
 // timer functions ---------------------------------------------
