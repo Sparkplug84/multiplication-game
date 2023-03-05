@@ -61,11 +61,12 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const keypadNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "X"];
 const amountOfQuestions = Array.from({ length: 100 }, (_, i) => i + 1);
 
-window.onload = function () {
-  setTimeout(function () {
-    window.scrollTo(0, 1);
-  }, 0);
-};
+// window.addEventListener("load", function () {
+//   setTimeout(function () {
+//     // This hides the address bar:
+//     window.scrollTo(0, 1);
+//   }, 0);
+// });
 
 // event listeners for button clicks --------------------------
 start.addEventListener("click", () => {
@@ -81,7 +82,8 @@ start.addEventListener("click", () => {
     addElement(countdownTimerContainer);
     startCountdown(3);
     slideLeft(quizPreferences);
-    removeElement(quizPreferences);
+    quizPreferences.style.visibility = "hidden";
+    // removeElement(quizPreferences);
     setTimeout(runGame, 3000);
   }
 });
@@ -123,7 +125,8 @@ mainMenuBtn.addEventListener("click", () => {
 });
 retryBtn.addEventListener("click", () => {
   slideRight(finishQuizContainer);
-  addElement(quizPreferences);
+  quizPreferences.style.visibility = "visible";
+  // addElement(quizPreferences);
   slideCentre(quizPreferences);
   removeElement(quizContainer);
   slideCentre(quizContainer);
@@ -285,7 +288,8 @@ function checkAnswer(totalQuestions) {
     currentQuestionNumber = 1;
     totalCorrectQuestions = 0;
     resetTimer();
-    removeElement(quizPreferences);
+    // removeElement(quizPreferences);
+    quizPreferences.style.visibility = "hidden";
     slideLeft(quizPreferences);
   }
   if (currentQuestionNumber == totalQuestions) {
@@ -294,7 +298,8 @@ function checkAnswer(totalQuestions) {
   userAnswer.innerText = null;
   multiplyQuestion = false;
   divideQuestion = false;
-  addElement(quizPreferences);
+  quizPreferences.style.visibility = "visible";
+  // addElement(quizPreferences);
 }
 
 function saveQuestion() {
@@ -315,10 +320,10 @@ function resetPlayerPreferences() {
 
 // element movement functions ----------------------------
 function slideLeft(element) {
-  element.style.transform = "translateX(-150%)";
+  element.style.transform = "translateX(-100vw)";
 }
 function slideRight(element) {
-  element.style.transform = "translateX(150%)";
+  element.style.transform = "translateX(100vw)";
 }
 function slideCentre(element) {
   element.style.transform = "translateX(0)";
