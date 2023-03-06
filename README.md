@@ -1,4 +1,4 @@
-# multiplication-game
+# Maths Game
 
 An app for kids to practice their times tables and dividing tables.
 
