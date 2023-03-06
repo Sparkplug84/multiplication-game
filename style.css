@@ -9,7 +9,7 @@
 
 .app {
   position: fixed;
-  padding-bottom: calc(0.05 * 100vh);
+  padding-bottom: calc(0.1 * 100vh);
   font-family: "Cabin";
   height: 100vh;
   width: 100vw;
@@ -22,6 +22,19 @@
     rgba(56, 25, 130, 1) 0%,
     rgba(91, 6, 157, 1) 49%
   );
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#quizPreferences {
+  visibility: hidden;
 }
 
 #quizPreferences,
@@ -40,6 +53,9 @@
   position: absolute;
   transform: translateX(0);
   transition: transform 0.8s ease-in-out;
+  animation: fadeInAnimation ease 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 .landing__container {
