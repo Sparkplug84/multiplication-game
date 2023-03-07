@@ -16,6 +16,8 @@ const multiplicationInput = document.getElementById("activateMultiplication");
 const divisionInput = document.getElementById("activateDivision");
 const tableChoiceInput = document.getElementById("tableChoices");
 const keypadContainer = document.getElementById("keypad");
+// const keypadNumbers = document.querySelectorAll('keypad__numbers')
+// const quizContainerButton = document.querySelector(".quiz__container-buttons");
 const questionNumberInput = document.getElementById("questionNumberList");
 const timeDisplay = document.querySelector("#timeDisplay");
 // const startBtn = document.querySelector("#startBtn");
@@ -61,6 +63,11 @@ const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const keypadNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "X"];
 const amountOfQuestions = Array.from({ length: 100 }, (_, i) => i + 1);
 
+// const progressBarPosition = progressBar.getBoundingClientRect().bottom;
+// console.log(progressBarPosition);
+// const keypadPosition = quizContainerButton.offset().top;
+// console.log(quizContainerButton);
+
 // window.addEventListener("load", function () {
 //   setTimeout(function () {
 //     // This hides the address bar:
@@ -90,9 +97,9 @@ start.addEventListener("click", () => {
 nextQuestion.addEventListener("click", () => {
   checkAnswer(totalQuestions);
 });
-deleteNumber.addEventListener("click", () => {
-  changeAnswer();
-});
+// deleteNumber.addEventListener("click", () => {
+//   changeAnswer();
+// });
 // startBtn.addEventListener("click", () => {
 //   startTimer();
 // });
@@ -135,6 +142,10 @@ reviewQuestionsBtn.addEventListener("click", () => {
   removeElement(finishQuizContainer);
   addElement(reviewContainer);
 });
+
+// const keypadArray = document.querySelectorAll("keypad__number");
+// const newArray = Array.prototype.slice.call(keypadArray);
+// console.log(keypadContainer.lastChild);
 
 // iterating arrays to create html elements -----------------------
 numbers.forEach((number) => {
@@ -221,7 +232,7 @@ function runGame() {
 }
 
 function populateQuiz(chosenTables) {
-  quizProgressTitle.innerText = `Question ${currentQuestionNumber} of ${totalQuestions}`;
+  quizProgressTitle.innerText = `${currentQuestionNumber}/${totalQuestions}`;
   if (multiplicationActive && divisionActive) getRandomQuestion(chosenTables);
   else if (multiplicationActive) getMultiplicationQuestion(chosenTables);
   else getDivisionQuestion(chosenTables);

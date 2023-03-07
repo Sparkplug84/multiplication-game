@@ -10,109 +10,111 @@
   </head>
   <body>
     <div class="app">
-      <div id="landingPage">
-        <div class="landing__container">
-          <div class="landing__hero">
-            <h1 class="landing__title">Welcome to the maths quiz</h1>
-            <div class="landing__image-container">
-              <img
-                class="landing__image"
-                src="./photos/math-removebg-preview.png"
-                alt=""
-              />
-              <!-- src="https://live.staticflickr.com/65535/52708368467_eacec1dbc0_z.jpg" -->
+      <div class="app__content">
+        <div id="landingPage">
+          <div class="landing__container">
+            <div class="landing__hero">
+              <h1 class="landing__title">Welcome to the maths quiz</h1>
+              <div class="landing__image-container">
+                <img
+                  class="landing__image"
+                  src="./photos/math-removebg-preview.png"
+                  alt=""
+                />
+                <!-- src="https://live.staticflickr.com/65535/52708368467_eacec1dbc0_z.jpg" -->
+              </div>
+            </div>
+            <div class="landing__button-container">
+              <button id="makeQuiz" class="btn primary-btn">
+                Create a quiz
+              </button>
+              <button id="howToPlay" class="btn secondary-btn">
+                How to play
+                <img class="btn-icon" src="./icons/Question Mark.svg" alt="" />
+              </button>
             </div>
           </div>
-          <div class="landing__button-container">
-            <button id="makeQuiz" class="btn primary-btn">Create a quiz</button>
-            <button id="howToPlay" class="btn secondary-btn">
-              How to play
-              <img class="btn-icon" src="./icons/Question Mark.svg" alt="" />
-            </button>
-          </div>
         </div>
-      </div>
 
-      <div id="quizPreferences" class="quiz__preferences-container">
-        <h3 class="quiz__preferences-title">Choose your preferences</h3>
-        <div class="quiz__preferences-section">
-          <h4>Question Type:</h4>
-          <div>
-            <input
-              type="checkbox"
-              id="activateMultiplication"
-              name="activateMultiplication"
-            />
-            <label for="activateMultiplication">Multiplication</label>
+        <div id="quizPreferences" class="quiz__preferences-container">
+          <h3 class="quiz__preferences-title">Choose your preferences</h3>
+          <div class="quiz__preferences-section">
+            <h4>Question Type:</h4>
+            <div>
+              <input
+                type="checkbox"
+                id="activateMultiplication"
+                name="activateMultiplication"
+              />
+              <label for="activateMultiplication">Multiplication</label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                id="activateDivision"
+                name="activateDivision"
+              />
+              <label for="activateDivision">Division</label>
+            </div>
           </div>
-          <div>
-            <input
-              type="checkbox"
-              id="activateDivision"
-              name="activateDivision"
-            />
-            <label for="activateDivision">Division</label>
+          <div id="tableChoices" class="quiz__preferences-section">
+            <h4>Choose Tables:</h4>
           </div>
+          <div class="quiz__preferences-section">
+            <h4>Number of questions:</h4>
+            <select name="questionCount" id="questionNumberList"></select>
+          </div>
+          <button id="startGame" class="btn primary-btn">Start quiz</button>
+          <button id="backToMenu" class="btn secondary-btn">Back</button>
         </div>
-        <div id="tableChoices" class="quiz__preferences-section">
-          <h4>Choose Tables:</h4>
-        </div>
-        <div class="quiz__preferences-section">
-          <h4>Number of questions:</h4>
-          <select name="questionCount" id="questionNumberList"></select>
-        </div>
-        <button id="startGame" class="btn primary-btn">Start quiz</button>
-        <button id="backToMenu" class="btn secondary-btn">Back</button>
-      </div>
 
-      <div id="countdownTimerContainer">
-        <div id="countdownTimer"></div>
-      </div>
+        <div id="countdownTimerContainer">
+          <div id="countdownTimer"></div>
+        </div>
 
-      <div id="quizContainer" class="quiz__container">
-        <div id="timeContainer">
-          <div id="timeDisplay">00:00:00</div>
-          <!-- <button id="startBtn">Start</button>
+        <div id="quizContainer" class="quiz__container">
+          <div id="timeContainer" class="quiz__container-time">
+            <div id="timeDisplay">00:00:00</div>
+            <!-- <button id="startBtn">Start</button>
           <button id="pauseBtn">Pause</button>
           <button id="resetBtn">Reset</button> -->
-        </div>
-        <div class="quiz__container-progress">
-          <p id="quizProgressTitle">Question 1 of 4</p>
-          <div class="progress__bar-container">
-            <div class="progress__bar"></div>
+          </div>
+          <div class="quiz__container-progress">
+            <div class="progress__bar-container">
+              <div class="progress__bar"></div>
+            </div>
+            <p id="quizProgressTitle">Question 1 of 4</p>
+
+            <!-- <progress id="quizProgress" value="0" max="100"></progress> -->
           </div>
 
-          <!-- <progress id="quizProgress" value="0" max="100"></progress> -->
+          <div class="quiz__container-sum">
+            <p class="quiz__container-digits"><span id="number1"></span></p>
+            <p class="quiz__container-digits"><span id="symbol"></span></p>
+            <p class="quiz__container-digits"><span id="number2"></span></p>
+            <!-- <p id="answer"></p> -->
+            <p class="quiz__container-digits"><span id="userAnswer"></span></p>
+          </div>
+          <button id="deleteNumber">Delete Number</button>
+          <div class="quiz__container-buttons">
+            <button id="nextQuestion" class="quiz__container-next"></button>
+            <div id="keypad" class="keypad__container"></div>
+          </div>
         </div>
 
-        <div class="quiz__container-sum">
-          <p id="number1"></p>
-          <p id="symbol"></p>
-          <p id="number2"></p>
-          <!-- <p id="answer"></p> -->
-          <p id="userAnswer"></p>
+        <div id="finishQuiz">
+          <p id="finishQuizMessage"></p>
+          <p id="quizFinishTime"></p>
+          <button id="retryBtn" class="btn primary-btn">Try Again</button>
+          <button id="mainMenuBtn" class="btn primary-btn">Main Menu</button>
+          <button id="reviewQuestionsBtn" class="btn secondary-btn">
+            Review Questions
+          </button>
         </div>
-        <button id="deleteNumber">Delete Number</button>
-        <!-- <button id="multiply">Multiply</button>
-        <button id="divide">Divide</button> -->
-        <div class="quiz__container-buttons">
-          <button id="nextQuestion" class="quiz__container-next"></button>
-          <div id="keypad" class="keypad__container"></div>
+
+        <div id="reviewContainer" class="app__modal">
+          <div id="reviewQuestionsContainer" class="review__questions"></div>
         </div>
-      </div>
-
-      <div id="finishQuiz">
-        <p id="finishQuizMessage"></p>
-        <p id="quizFinishTime"></p>
-        <button id="retryBtn" class="btn primary-btn">Try Again</button>
-        <button id="mainMenuBtn" class="btn primary-btn">Main Menu</button>
-        <button id="reviewQuestionsBtn" class="btn secondary-btn">
-          Review Questions
-        </button>
-      </div>
-
-      <div id="reviewContainer" class="app__modal">
-        <div id="reviewQuestionsContainer" class="review__questions"></div>
       </div>
     </div>
     <script src="script.js"></script>
