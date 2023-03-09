@@ -39,6 +39,11 @@ const countdownTimer = document.querySelector("#countdownTimer");
 const countdownTimerContainer = document.querySelector(
   "#countdownTimerContainer"
 );
+const howToPlay = document.querySelector("#howToPlay");
+const modalInstructions = document.querySelector(".modal__instructions");
+const modalCloseButton = document.querySelector(".modal__close-button");
+const modalButton = document.querySelector(".modal-btn");
+const modalOverlay = document.querySelector(".modal__overlay");
 
 // game variables --------------------------------------------
 let startGame = false;
@@ -142,7 +147,22 @@ reviewQuestionsBtn.addEventListener("click", () => {
   removeElement(finishQuizContainer);
   addElement(reviewContainer);
 });
-
+howToPlay.addEventListener("click", () => {
+  modalInstructions.classList.add("modal__appear");
+  modalOverlay.classList.add("modal__overlay-visible");
+});
+modalCloseButton.addEventListener("click", () => {
+  modalInstructions.classList.remove("modal__appear");
+  modalOverlay.classList.remove("modal__overlay-visible");
+});
+modalButton.addEventListener("click", () => {
+  modalInstructions.classList.remove("modal__appear");
+  modalOverlay.classList.remove("modal__overlay-visible");
+});
+modalOverlay.addEventListener("click", () => {
+  modalInstructions.classList.remove("modal__appear");
+  modalOverlay.classList.remove("modal__overlay-visible");
+});
 // const keypadArray = document.querySelectorAll("keypad__number");
 // const newArray = Array.prototype.slice.call(keypadArray);
 // console.log(keypadContainer.lastChild);
