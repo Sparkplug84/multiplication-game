@@ -53,7 +53,7 @@
   transform: translateX(100vw);
   transition: transform 0.8s ease-in-out;
 }
-#reviewContainer,
+/* #reviewContainer, */
 #quizContainer {
   display: none;
   transition: transform 0.8s ease-in-out;
@@ -179,10 +179,13 @@
 /* ---------------- Modal Styles ---------------------- */
 
 .modal {
+  position: absolute;
   margin: auto;
   margin-top: 5vh;
   width: 90vw;
+  max-width: 600px;
   height: 85vh;
+  max-height: 800px;
   background-color: #c0cfec;
   color: #000;
   border-radius: 25px;
@@ -241,6 +244,7 @@
 }
 
 .modal__overlay {
+  position: absolute;
   display: none;
   width: 100vw;
   height: 100vh;
@@ -353,6 +357,20 @@
   margin-right: 10px;
   margin-left: 10px;
   border-radius: 10px;
+}
+.quiz__container-digits:last-child::after {
+  content: "";
+  width: 1px;
+  height: 40%;
+  background-color: #000;
+  display: inline-block;
+  animation: cursor-blink 1.2s steps(2) infinite;
+}
+
+@keyframes cursor-blink {
+  0% {
+    opacity: 0;
+  }
 }
 
 .quiz__container-buttons {
