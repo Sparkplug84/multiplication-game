@@ -41,9 +41,13 @@ const countdownTimerContainer = document.querySelector(
 );
 const howToPlay = document.querySelector("#howToPlay");
 const modalInstructions = document.querySelector(".modal__instructions");
-const modalCloseButton = document.querySelector(".modal__close-button");
+const modalCloseInstructions = document.querySelector(
+  ".modal__close-instructions"
+);
+const modalCloseReview = document.querySelector(".modal__close-review");
 const modalButton = document.querySelector(".modal-btn");
 const modalOverlay = document.querySelector(".modal__overlay");
+const modalReview = document.querySelector(".modal__review");
 
 // game variables --------------------------------------------
 let startGame = false;
@@ -102,9 +106,9 @@ start.addEventListener("click", () => {
 nextQuestion.addEventListener("click", () => {
   checkAnswer(totalQuestions);
 });
-// deleteNumber.addEventListener("click", () => {
-//   changeAnswer();
-// });
+deleteNumber.addEventListener("click", () => {
+  changeAnswer();
+});
 // startBtn.addEventListener("click", () => {
 //   startTimer();
 // });
@@ -144,15 +148,21 @@ retryBtn.addEventListener("click", () => {
   slideCentre(quizContainer);
 });
 reviewQuestionsBtn.addEventListener("click", () => {
-  removeElement(finishQuizContainer);
-  addElement(reviewContainer);
+  modalReview.classList.add("modal__appear");
+  modalOverlay.classList.add("modal__overlay-visible");
+  // removeElement(finishQuizContainer);
+  // addElement(reviewContainer);
 });
 howToPlay.addEventListener("click", () => {
   modalInstructions.classList.add("modal__appear");
   modalOverlay.classList.add("modal__overlay-visible");
 });
-modalCloseButton.addEventListener("click", () => {
+modalCloseInstructions.addEventListener("click", () => {
   modalInstructions.classList.remove("modal__appear");
+  modalOverlay.classList.remove("modal__overlay-visible");
+});
+modalCloseReview.addEventListener("click", () => {
+  modalReview.classList.remove("modal__appear");
   modalOverlay.classList.remove("modal__overlay-visible");
 });
 modalButton.addEventListener("click", () => {

@@ -11,6 +11,7 @@
   <body>
     <div class="app">
       <div class="app__content">
+        <!--------------------- Landing Page --------------------->
         <div id="landingPage">
           <div class="landing__container">
             <div class="landing__hero">
@@ -36,9 +37,10 @@
           </div>
         </div>
 
+        <!------------------- Modal Instructions -------------------->
         <div class="modal modal__instructions">
           <div class="modal__close">
-            <p class="modal__close-button">x</p>
+            <p class="modal__close-button modal__close-instructions">x</p>
           </div>
           <div class="modal__content">
             <h3 class="modal__title">Game Instructions</h3>
@@ -82,8 +84,10 @@
           </div>
         </div>
 
+        <!--------------------- Modal Overlay --------------------->
         <div class="modal__overlay"></div>
 
+        <!--------------------- Quiz Preferences --------------------->
         <div id="quizPreferences" class="quiz__preferences-container">
           <h3 class="quiz__preferences-title">Choose your preferences</h3>
           <div class="quiz__preferences-section">
@@ -116,10 +120,12 @@
           <button id="backToMenu" class="btn secondary-btn">Back</button>
         </div>
 
+        <!--------------------- Countdown Timer --------------------->
         <div id="countdownTimerContainer">
           <div id="countdownTimer"></div>
         </div>
 
+        <!--------------------- Quiz Container --------------------->
         <div id="quizContainer" class="quiz__container">
           <div id="timeContainer" class="quiz__container-time">
             <div id="timeDisplay">00:00:00</div>
@@ -150,6 +156,7 @@
           </div>
         </div>
 
+        <!--------------------- Finish Quiz --------------------->
         <div id="finishQuiz">
           <p id="finishQuizMessage"></p>
           <p id="quizFinishTime"></p>
@@ -160,8 +167,15 @@
           </button>
         </div>
 
-        <div id="reviewContainer" class="app__modal">
-          <div id="reviewQuestionsContainer" class="review__questions"></div>
+        <!--------------------- Review Modal --------------------->
+        <div id="reviewContainer" class="modal modal__review">
+          <div class="modal__close">
+            <p class="modal__close-button modal__close-review">x</p>
+          </div>
+          <div class="modal__content">
+            <h3 class="modal__title">Review Your Questions</h3>
+            <div id="reviewQuestionsContainer" class="review__questions"></div>
+          </div>
         </div>
       </div>
     </div>
