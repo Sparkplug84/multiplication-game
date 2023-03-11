@@ -47,33 +47,27 @@
             <div class="modal__instruction-line">
               <p>1.</p>
               <p class="modal__instruction-text">
-                Click on the <b>Create a quiz</b> button to naviate to the quiz
+                Click on the <b>Create a quiz</b> button to navigate to the quiz
                 preferences page.
               </p>
             </div>
             <div class="modal__instruction-line">
               <p>2.</p>
               <p class="modal__instruction-text">
-                For the <b>Question Type</b> you can either choose multipication
-                questions only or division questions only or both.
+                For the <b>question type</b> and <b>table choices</b> you must
+                choose at least one of each but multiple choices are also
+                possible.
               </p>
             </div>
             <div class="modal__instruction-line">
               <p>3.</p>
               <p class="modal__instruction-text">
-                For the <b>Table Choices</b>, you can choose as many or as
-                little as you want but you must choose at least one to proceed.
+                Finally choose how many questions you want to generate. Anywhere
+                from 1 to 100.
               </p>
             </div>
             <div class="modal__instruction-line">
               <p>4.</p>
-              <p class="modal__instruction-text">
-                Finally choose how many questions you want to generate. Question
-                range is from 1-100.
-              </p>
-            </div>
-            <div class="modal__instruction-line">
-              <p>5.</p>
               <p class="modal__instruction-text">
                 When you are happy with your game preferences click
                 <b>Start quiz</b> and the quiz will begin to generate random
@@ -149,10 +143,20 @@
             <!-- <p id="answer"></p> -->
             <p class="quiz__container-digits"><span id="userAnswer"></span></p>
           </div>
-          <button id="deleteNumber">Delete Number</button>
+          <!-- <button id="deleteNumber">Delete Number</button> -->
           <div class="quiz__container-buttons">
             <button id="nextQuestion" class="quiz__container-next"></button>
-            <div id="keypad" class="keypad__container"></div>
+            <div id="keypad" class="keypad__container">
+              <div class="keypad__extra-buttons">
+                <button class="keypad__extra-button keypad__stopQuiz">B</button>
+                <button
+                  id="deleteNumber"
+                  class="keypad__extra-button keypad__deleteButton"
+                >
+                  X
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
