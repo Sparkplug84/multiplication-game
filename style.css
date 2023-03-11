@@ -285,8 +285,9 @@
 
 .quiz__container {
   width: 80%;
-  height: 90%;
+  height: 100%;
   position: relative;
+  padding-top: 30px;
 }
 
 /* .quiz__container-time {
@@ -376,50 +377,87 @@
 .quiz__container-buttons {
   position: absolute;
   bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .quiz__container-next {
   display: block;
   text-align: center;
-  background: #c0cfec;
+  background: none;
+  border: #c0cfec 2px solid;
   margin: 10px;
-  width: calc(100% - 20px);
-  border: none;
+  width: calc(90% - 20px);
   height: 50px;
   font-size: large;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   transition: all 0.3s;
-  color: #000;
+  color: #c0cfec;
 }
 
 .keypad__container {
-  width: 100%;
+  width: 90%;
   /* display: grid;
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(4, 80px);
   gap: 10px; */
   display: flex;
   flex-wrap: wrap;
-  justify-content: right;
+  justify-content: center;
+  position: relative;
+}
+
+.keypad__extra-buttons {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.keypad__extra-button {
+  bottom: 0;
+  width: calc(33.3% - 20px);
+  height: 60px;
+  background: none;
+  border: #c0cfec 2px solid;
+  color: #c0cfec;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.keypad__stopQuiz {
+  left: 0;
+}
+
+.keypad__deleteButton {
+  right: 0;
 }
 
 .keypad__number {
   flex: 0 0 calc(33.33% - 20px);
-  background: #c0cfec;
-  height: 70px;
-  color: #000;
+  background: none;
+  border: #c0cfec 2px solid;
+  height: 60px;
+  color: #c0cfec;
   padding: 20px;
   margin: 10px;
   font-size: large;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border: none;
   transition: all 0.2s;
 }
 
 .keypad__number:active,
-.quiz__container-next:active {
+.quiz__container-next:active,
+.keypad__extra-button:active {
   transform: scale(0.9);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+  background-color: #c0cfec;
 }
 
 #countdownTimerContainer {

@@ -7,6 +7,7 @@ const firstNumber = document.getElementById("number1");
 const secondNumber = document.getElementById("number2");
 // const thisAnswer = document.getElementById("answer");
 const userAnswer = document.getElementById("userAnswer");
+// const deleteNumber = document.getElementById("deleteNumber");
 const deleteNumber = document.getElementById("deleteNumber");
 const nextQuestion = document.getElementById("nextQuestion");
 const multiply = document.getElementById("multiply");
@@ -69,7 +70,7 @@ let intervalId = null;
 
 // arrays -----------------------------------------------------
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-const keypadNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "X"];
+const keypadNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const amountOfQuestions = Array.from({ length: 100 }, (_, i) => i + 1);
 
 // const progressBarPosition = progressBar.getBoundingClientRect().bottom;
@@ -107,7 +108,9 @@ nextQuestion.addEventListener("click", () => {
   checkAnswer(totalQuestions);
 });
 deleteNumber.addEventListener("click", () => {
+  console.log("start");
   changeAnswer();
+  console.log("end");
 });
 // startBtn.addEventListener("click", () => {
 //   startTimer();
