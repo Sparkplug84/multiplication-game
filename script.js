@@ -9,6 +9,7 @@ const secondNumber = document.getElementById("number2");
 const userAnswer = document.getElementById("userAnswer");
 // const deleteNumber = document.getElementById("deleteNumber");
 const deleteNumber = document.getElementById("deleteNumber");
+const stopQuiz = document.getElementById("stopQuiz");
 const nextQuestion = document.getElementById("nextQuestion");
 const multiply = document.getElementById("multiply");
 const divide = document.getElementById("divide");
@@ -16,7 +17,7 @@ const symbol = document.getElementById("symbol");
 const multiplicationInput = document.getElementById("activateMultiplication");
 const divisionInput = document.getElementById("activateDivision");
 const tableChoiceInput = document.getElementById("tableChoices");
-const keypadContainer = document.getElementById("keypad");
+const keypadContainer = document.querySelector(".keypad__container");
 // const keypadNumbers = document.querySelectorAll('keypad__numbers')
 // const quizContainerButton = document.querySelector(".quiz__container-buttons");
 const questionNumberInput = document.getElementById("questionNumberList");
@@ -42,10 +43,14 @@ const countdownTimerContainer = document.querySelector(
 );
 const howToPlay = document.querySelector("#howToPlay");
 const modalInstructions = document.querySelector(".modal__instructions");
+const modalStop = document.querySelector(".modal__stop");
+const stopQuizContainer = document.getElementById("stopQuizContainer");
+const continueGame = document.getElementById("continueGame");
 const modalCloseInstructions = document.querySelector(
   ".modal__close-instructions"
 );
 const modalCloseReview = document.querySelector(".modal__close-review");
+const modalCloseStop = document.querySelector(".modal__close-stop");
 const modalButton = document.querySelector(".modal-btn");
 const modalOverlay = document.querySelector(".modal__overlay");
 const modalReview = document.querySelector(".modal__review");
@@ -72,6 +77,10 @@ let intervalId = null;
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 const keypadNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 const amountOfQuestions = Array.from({ length: 100 }, (_, i) => i + 1);
+
+// const progressEl = progressBar.getBoundingClientRect();
+// const progressBottom = progressEl.bottom;
+// console.log(progressBottom);
 
 // const progressBarPosition = progressBar.getBoundingClientRect().bottom;
 // console.log(progressBarPosition);
@@ -168,6 +177,22 @@ modalCloseReview.addEventListener("click", () => {
   modalReview.classList.remove("modal__appear");
   modalOverlay.classList.remove("modal__overlay-visible");
 });
+stopQuiz.addEventListener("click", () => {
+  pauseTimer();
+  modalOverlay.classList.add("modal__overlay-visible");
+  modalStop.classList.add("modal__appear");
+  stopQuizContainer.style.height = "50vh";
+});
+modalCloseStop.addEventListener("click", () => {
+  modalOverlay.classList.remove("modal__overlay-visible");
+  modalStop.classList.remove("modal__appear");
+  startTimer();
+});
+continueGame.addEventListener("click", () => {
+  modalOverlay.classList.remove("modal__overlay-visible");
+  modalStop.classList.remove("modal__appear");
+  startTimer();
+});
 modalButton.addEventListener("click", () => {
   modalInstructions.classList.remove("modal__appear");
   modalOverlay.classList.remove("modal__overlay-visible");
@@ -175,6 +200,8 @@ modalButton.addEventListener("click", () => {
 modalOverlay.addEventListener("click", () => {
   modalInstructions.classList.remove("modal__appear");
   modalOverlay.classList.remove("modal__overlay-visible");
+  modalStop.classList.remove("modal__appear");
+  startTimer();
 });
 // const keypadArray = document.querySelectorAll("keypad__number");
 // const newArray = Array.prototype.slice.call(keypadArray);
