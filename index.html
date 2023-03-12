@@ -29,8 +29,8 @@
               <button id="makeQuiz" class="btn primary-btn">
                 Create a quiz
               </button>
-              <button id="howToPlay" class="btn secondary-btn">
-                How to play
+              <button id="howToPlay" class="btn secondary-btn btn-how">
+                How to play<span></span>
                 <img class="btn-icon" src="./icons/Question Mark.svg" alt="" />
               </button>
             </div>
@@ -144,19 +144,44 @@
             <p class="quiz__container-digits"><span id="userAnswer"></span></p>
           </div>
           <!-- <button id="deleteNumber">Delete Number</button> -->
+          <!-- <button
+            id="deleteNumber"
+            class="keypad__extra-button keypad__deleteButton"
+          >
+            X
+          </button> -->
           <div class="quiz__container-buttons">
             <button id="nextQuestion" class="quiz__container-next"></button>
-            <div id="keypad" class="keypad__container">
-              <div class="keypad__extra-buttons">
-                <button class="keypad__extra-button keypad__stopQuiz">B</button>
-                <button
-                  id="deleteNumber"
-                  class="keypad__extra-button keypad__deleteButton"
-                >
-                  X
-                </button>
-              </div>
+            <div class="keypad__container"></div>
+            <div class="keypad__extra-buttons">
+              <button
+                id="stopQuiz"
+                class="keypad__extra-button keypad__stopQuiz"
+              >
+                <img class="btn-icon" src="./icons/Return.svg" alt="" />
+              </button>
+              <button
+                id="deleteNumber"
+                class="keypad__extra-button keypad__deleteButton"
+              >
+                <img class="btn-icon" src="./icons/Delete.svg" alt="" />
+              </button>
             </div>
+          </div>
+        </div>
+
+        <div id="stopQuizContainer" class="modal modal__stop">
+          <div class="modal__close">
+            <p class="modal__close-button modal__close-stop">x</p>
+          </div>
+          <div class="modal__content">
+            <p class="modal__title">Are you sure you want to stop the quiz?</p>
+            <button id="continueGame" class="btn modal-btn-secondary">
+              Continue Quiz
+            </button>
+            <button id="stopGameButton" class="btn modal-btn">
+              Back to Menu
+            </button>
           </div>
         </div>
 

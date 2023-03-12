@@ -20,7 +20,7 @@
   background: linear-gradient(
     135deg,
     rgba(56, 25, 130, 1) 0%,
-    rgba(91, 6, 157, 1) 49%
+    rgba(110, 0, 157, 1) 60%
   );
 }
 
@@ -70,12 +70,12 @@
   animation-fill-mode: forwards;
 }
 
-.landing__container {
-  /* position: absolute;
+/* .landing__container {
+  position: absolute;
   top: 50%;
   -ms-transform: translateY(-50%);
-  transform: translateY(-50%); */
-}
+  transform: translateY(-50%);
+} */
 
 .landing__hero {
   display: flex;
@@ -91,8 +91,8 @@
   width: 60%;
 }
 
-.landing__image-container {
-}
+/* .landing__image-container {
+} */
 
 .landing__image {
   height: auto;
@@ -128,9 +128,12 @@
 .btn-icon {
   height: 40%;
   width: auto;
+  /* filter: invert(0%) sepia(100%) saturate(7434%) hue-rotate(211deg)
+    brightness(115%) contrast(115%); */
+}
+
+.btn-how img {
   margin-left: 10px;
-  filter: invert(0%) sepia(100%) saturate(7434%) hue-rotate(211deg)
-    brightness(115%) contrast(115%);
 }
 
 .primary-btn {
@@ -163,7 +166,6 @@
 }
 
 .modal-btn {
-  margin-top: 50px;
   background-color: #4d0d92;
   border: none;
   margin-right: auto;
@@ -173,6 +175,20 @@
 .modal-btn:hover {
   background-color: rgb(0, 0, 0, 0.1);
   border: 2px solid #fff;
+  color: #fff;
+}
+
+.modal-btn-secondary {
+  background-color: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.modal-btn-secondary:hover {
+  background-color: #4d0d92;
+  border: none;
   color: #fff;
 }
 
@@ -317,6 +333,9 @@
 }
 
 .quiz__container-sum {
+  position: absolute;
+  width: 100%;
+  top: calc(30% - 70px);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   /* justify-content: space-evenly;
@@ -344,9 +363,9 @@
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
-.quiz__container-digits:nth-child(2) {
-  /* background-color: blue; */
-}
+/* .quiz__container-digits:nth-child(2) {
+  background-color: blue;
+} */
 .quiz__container-digits:nth-child(3) {
   /* background-color: blue; */
   margin-right: 10px;
@@ -406,11 +425,12 @@
   flex-wrap: wrap;
   justify-content: center;
   position: relative;
+  z-index: 10;
 }
 
 .keypad__extra-buttons {
   position: absolute;
-  width: 100%;
+  width: 90%;
   bottom: 0;
   display: flex;
   justify-content: space-between;
@@ -433,10 +453,12 @@
 
 .keypad__stopQuiz {
   left: 0;
+  z-index: 20;
 }
 
 .keypad__deleteButton {
   right: 0;
+  z-index: 20;
 }
 
 .keypad__number {
