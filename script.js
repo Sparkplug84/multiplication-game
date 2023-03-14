@@ -218,7 +218,7 @@ numbers.forEach((number) => {
 });
 
 keypadNumbers.forEach((number) => {
-  const numberButtons = `<button class="keypad__number" value="${number}" onclick="selectNumber(${number})">${number}</button>`;
+  const numberButtons = `<button class="keypad__number" value="${number}" onclick="selectNumber(${number})" ontouchstart>${number}</button>`;
   keypadContainer.innerHTML += numberButtons;
 });
 
