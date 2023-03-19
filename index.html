@@ -84,10 +84,10 @@
         <!--------------------- Quiz Preferences --------------------->
         <div id="quizPreferences" class="quiz__preferences-container">
           <h3 class="quiz__preferences-title">Choose your preferences</h3>
-          <div class="quiz__preferences-type">
-            <h4>Question Type:</h4>
+          <div class="quiz__preferences-type quiz__preferences-section">
+            <h4>Question Type</h4>
             <div>
-              <div>
+              <div class="quiz__preferences-type-column">
                 <input
                   type="checkbox"
                   id="activateMultiplication"
@@ -95,7 +95,7 @@
                 />
                 <label for="activateMultiplication">Multiplication</label>
               </div>
-              <div>
+              <div class="quiz__preferences-type-column">
                 <input
                   type="checkbox"
                   id="activateDivision"
@@ -106,10 +106,14 @@
             </div>
           </div>
           <div id="tableChoices" class="quiz__preferences-section">
-            <h4>Choose Tables:</h4>
+            <h4>Tables</h4>
+            <div class="quiz__preferences-tables-container">
+              <div class="quiz__preferences-tables2"></div>
+              <div class="quiz__preferences-tables1"></div>
+            </div>
           </div>
           <div class="quiz__preferences-section">
-            <h4>Number of questions:</h4>
+            <h4>Number of questions</h4>
             <select name="questionCount" id="questionNumberList"></select>
           </div>
           <button id="startGame" class="btn primary-btn">Start quiz</button>
