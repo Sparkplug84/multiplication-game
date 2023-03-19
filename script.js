@@ -16,7 +16,9 @@ const divide = document.getElementById("divide");
 const symbol = document.getElementById("symbol");
 const multiplicationInput = document.getElementById("activateMultiplication");
 const divisionInput = document.getElementById("activateDivision");
-const tableChoiceInput = document.getElementById("tableChoices");
+const checkAllTables = document.getElementById("checkAllTables");
+const tableChoiceInput1 = document.querySelector(".quiz__preferences-tables1");
+const tableChoiceInput2 = document.querySelector(".quiz__preferences-tables2");
 const keypadContainer = document.querySelector(".keypad__container");
 // const keypadNumbers = document.querySelectorAll('keypad__numbers')
 // const quizContainerButton = document.querySelector(".quiz__container-buttons");
@@ -66,6 +68,7 @@ let divisionActive;
 let chosenTables;
 let correctAnswer;
 let totalQuestions;
+let checkedTables = false;
 
 // timer variables -------------------------------------------
 let minutes = 0;
@@ -203,18 +206,36 @@ modalOverlay.addEventListener("click", () => {
   modalStop.classList.remove("modal__appear");
   startTimer();
 });
+
 // const keypadArray = document.querySelectorAll("keypad__number");
 // const newArray = Array.prototype.slice.call(keypadArray);
 // console.log(keypadContainer.lastChild);
 
 // iterating arrays to create html elements -----------------------
-numbers.forEach((number) => {
-  const tableOptions = `
-  <div>
-  <input class="table-choices" type="checkbox" id="table${number}" name="table-choices" value="${number}" />
-  <label for="table${number}">x${number}</label>
+
+const allTablesCheckbox = `
+  <div class="table-choices">
+    <input type="checkbox" id="checkAllTables" name="table-choices-all" onclick="selectAll()"/>
+    <label for="table-choices-all">All</label>
   </div>`;
-  tableChoiceInput.innerHTML += tableOptions;
+tableChoiceInput2.innerHTML += allTablesCheckbox;
+
+numbers.forEach((number) => {
+  if (number < 7) {
+    const tableOptions = `
+      <div class="table-choices">
+        <input type="checkbox" id="table${number}" name="table-choices" value="${number}" />
+        <label for="table${number}">x${number}</label>
+      </div>`;
+    tableChoiceInput2.innerHTML += tableOptions;
+  } else {
+    const tableOptions = `
+      <div class="table-choices">
+        <input type="checkbox" id="table${number}" name="table-choices" value="${number}" />
+        <label for="table${number}">x${number}</label>
+      </div>`;
+    tableChoiceInput1.innerHTML += tableOptions;
+  }
 });
 
 keypadNumbers.forEach((number) => {
@@ -222,12 +243,27 @@ keypadNumbers.forEach((number) => {
   keypadContainer.innerHTML += numberButtons;
 });
 
+// const optionChoose = `<option class="quiz__preferences-question-count">-- Please choose --</option>`;
+// questionNumberInput.innerHTML += optionChoose;
+
 amountOfQuestions.forEach((question) => {
-  const questionNumber = `<option value="${question}">${question}</option>`;
+  const questionNumber = `<option class="quiz__preferences-question-count" value="${question}">${question}</option>`;
   questionNumberInput.innerHTML += questionNumber;
 });
 
 // game functions ----------------------------------------------
+
+function selectAll() {
+  console.log(checkedTables);
+  checkedTables = !checkedTables;
+  document
+    .querySelectorAll("input[type=checkbox][name=table-choices]")
+    .forEach((item) => {
+      if (checkedTables) item.checked = true;
+      else item.checked = false;
+    });
+  console.log(checkedTables);
+}
 
 function startCountdown(seconds) {
   let counter = seconds;
