@@ -129,17 +129,12 @@
         <div id="quizContainer" class="quiz__container">
           <div id="timeContainer" class="quiz__container-time">
             <div id="timeDisplay">00:00:00</div>
-            <!-- <button id="startBtn">Start</button>
-          <button id="pauseBtn">Pause</button>
-          <button id="resetBtn">Reset</button> -->
           </div>
           <div class="quiz__container-progress">
             <div class="progress__bar-container">
               <div class="progress__bar"></div>
             </div>
             <p id="quizProgressTitle">Question 1 of 4</p>
-
-            <!-- <progress id="quizProgress" value="0" max="100"></progress> -->
           </div>
 
           <div class="quiz__container-sum">
@@ -149,13 +144,67 @@
             <!-- <p id="answer"></p> -->
             <p class="quiz__container-digits"><span id="userAnswer"></span></p>
           </div>
-          <!-- <button id="deleteNumber">Delete Number</button> -->
-          <!-- <button
-            id="deleteNumber"
-            class="keypad__extra-button keypad__deleteButton"
-          >
-            X
-          </button> -->
+
+          <div class="quiz__container-result">
+            <div class="trigger"></div>
+            <svg
+              version="1.1"
+              id="tick"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              viewBox="0 0 37 37"
+              style="enable-background: new 0 0 37 37"
+              xml:space="preserve"
+            >
+              <polyline
+                class="tick path"
+                style="
+                  fill: none;
+                  stroke: #000;
+                  stroke-width: 3;
+                  stroke-linejoin: round;
+                  stroke-miterlimit: 10;
+                "
+                points="
+  11.6,20 15.9,24.2 26.4,13.8 "
+              />
+            </svg>
+          </div>
+          <div class="quiz__container-result2">
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 130.2 130.2"
+            >
+              <line
+                class="path2 line"
+                fill="none"
+                stroke="#000"
+                stroke-width="10"
+                stroke-linecap="round"
+                stroke-miterlimit="10"
+                x1="34.4"
+                y1="37.9"
+                x2="95.8"
+                y2="92.3"
+              />
+              <line
+                class="path2 line"
+                fill="none"
+                stroke="#000"
+                stroke-width="10"
+                stroke-linecap="round"
+                stroke-miterlimit="10"
+                x1="95.8"
+                y1="38"
+                x2="34.4"
+                y2="92.2"
+              />
+            </svg>
+          </div>
+
           <div class="quiz__container-buttons">
             <button id="nextQuestion" class="quiz__container-next"></button>
             <div class="keypad__container"></div>
