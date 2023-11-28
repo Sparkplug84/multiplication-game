@@ -291,10 +291,66 @@
   margin: 20px;
 }
 
+.review__questions div {
+  display: flex;
+  margin-bottom: 5px;
+  align-items: center;
+}
+
+.review__questions p {
+  color: var(--grey-text);
+}
+
+.review__questions .review__first-number,
+.review__questions .review__second-number,
+.review__questions .review__answer,
+.review__questions .review_question-number {
+  width: 30px;
+}
+
+.review__questions .review__symbol {
+  width: 25px;
+}
+
+.review__questions .review__answer-correct {
+  /* width: 30px; */
+  color: var(--white);
+  background-color: green;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 4px;
+}
+.review__questions .review__answer-incorrect {
+  /* width: 30px; */
+  color: var(--white);
+  background-color: red;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 4px;
+}
+.review__questions .review__correct-answer {
+  margin-left: 35px;
+  color: var(--white);
+  background-color: green;
+  padding-left: 4px;
+  padding-right: 4px;
+  border-radius: 4px;
+}
+
+.review__questions .review__answer-symbol-container {
+  display: flex;
+  align-items: center;
+}
+.review__questions .review__answer-symbol {
+  height: 15px;
+  margin-left: 4px;
+}
+
 /* ---------------- Quiz Preferences ---------------------- */
 
 .quiz__preferences-container {
-  width: 80%;
+  max-width: 600px;
+  min-width: 330px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -314,6 +370,7 @@
   margin-bottom: 20px;
   border: var(--white) 1px solid;
   padding: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .quiz__preferences-type div {
@@ -475,6 +532,23 @@ select {
   color: #c0cfec;
 }
 
+.quiz__container-result,
+.quiz__container-result2 {
+  position: absolute;
+  top: calc(31% - 70px);
+  /* width: 100%;
+  height: 10%; */
+  right: -15px;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
+.quiz__container-result svg {
+  height: 50px;
+  width: auto;
+}
+
 .keypad__container {
   width: 90%;
   /* display: grid;
@@ -561,4 +635,175 @@ select {
   font-size: 48px;
   color: #fff;
   animation: fadeout-timer 1s ease-out forwards 3;
+}
+
+/* -------------------------------- Tick Animation ------------------------------------------ */
+
+/* .circ {
+  opacity: 0;
+  stroke-dasharray: 130;
+  stroke-dashoffset: 130;
+  -webkit-transition: all 0.4s;
+  -moz-transition: all 0.4s;
+  -ms-transition: all 0.4s;
+  -o-transition: all 0.4s;
+  transition: all 0.4s;
+} */
+.tick {
+  stroke-dasharray: 50;
+  stroke-dashoffset: 50;
+  -webkit-transition: stroke-dashoffset 0.4s 0.2s ease-out;
+  -moz-transition: stroke-dashoffset 0.4s 0.2s ease-out;
+  -ms-transition: stroke-dashoffset 0.4s 0.2s ease-out;
+  -o-transition: stroke-dashoffset 0.4s 0.2s ease-out;
+  transition: stroke-dashoffset 0.4s 0.2s ease-out;
+}
+.drawn + svg .path {
+  opacity: 1;
+  stroke-dashoffset: 0;
+}
+
+.cross__svg {
+  border-radius: 50%;
+  display: block;
+  height: 154px;
+  margin: 4rem auto;
+  stroke-width: 3;
+  width: 154px;
+}
+
+.cross__path {
+  stroke: color;
+  stroke-dasharray: 48;
+  stroke-dashoffset: 48;
+  transform-origin: 50% 50% 0;
+}
+.cross__path--right {
+  animation: 0.3s ease 0.8s normal forwards 1 running stroke;
+}
+.cross__path--left {
+  animation: 1s ease 0.8s normal forwards 1 running stroke;
+}
+
+@keyframes stroke {
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.cross-container {
+  height: 30px;
+  width: 30px;
+  position: relative;
+  /* opacity: 0; */
+  /* background-color: red; */
+}
+
+.cross-container svg {
+  height: 30px;
+  width: 30px;
+}
+
+.cross-line1 {
+  position: absolute;
+  left: -5px;
+  top: 25px;
+  width: 0;
+  height: 2px;
+  border: 1px solid black;
+  transform: rotate(45deg);
+  transform-origin: center;
+  animation: animateX 10s 1 forwards;
+}
+
+.cross-line2 {
+  position: absolute;
+  left: -5px;
+  top: 25px;
+  width: 30px;
+  height: 2px;
+  border: 1px solid black;
+  transform: rotate(-45deg);
+  transform-origin: center;
+  /* animation: animateX 10s 1 forwards; */
+}
+
+@keyframes animateX {
+  50% {
+    width: 15px;
+  }
+  100% {
+    width: 30px;
+  }
+}
+
+/* svg {
+  width: 100px;
+  display: block;
+  margin: 40px auto 0;
+} */
+
+.quiz__container-result2 {
+  margin-right: 8px;
+}
+
+.quiz__container-result2 svg {
+  margin-top: 10px;
+  height: 35px;
+  width: 35px;
+  margin-left: 44px;
+  opacity: 0;
+}
+
+.path2 {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 0;
+}
+.path2,
+.line {
+  stroke-dashoffset: 1000;
+  -webkit-animation: dash 0.9s 0.35s ease-in-out forwards;
+  animation: dash 0.9s 0.35s ease-in-out forwards;
+}
+.path2,
+.check {
+  stroke-dashoffset: -100;
+  -webkit-animation: dash-check 0.9s 0.35s ease-in-out forwards;
+  animation: dash-check 0.9s 0.35s ease-in-out forwards;
+}
+
+@-webkit-keyframes dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@-webkit-keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
+  }
+}
+
+@keyframes dash-check {
+  0% {
+    stroke-dashoffset: -100;
+  }
+  100% {
+    stroke-dashoffset: 900;
+  }
 }

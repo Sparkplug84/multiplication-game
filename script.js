@@ -56,6 +56,13 @@ const modalCloseStop = document.querySelector(".modal__close-stop");
 const modalButton = document.querySelector(".modal-btn");
 const modalOverlay = document.querySelector(".modal__overlay");
 const modalReview = document.querySelector(".modal__review");
+const tickAnimation = document.querySelector(".trigger");
+// const crossAnimation = document.querySelector(".addClass");
+// const crossAnimation = document.getElementById("path");
+// const crossAnimation1 = document.getElementById("path2");
+// const crossAnimation2 = document.getElementById("path3");
+const crossAnimationNew = document.querySelector(".quiz__container-result2");
+const crossAnimationNew2 = document.querySelector(".path2");
 
 // game variables --------------------------------------------
 let startGame = false;
@@ -151,6 +158,7 @@ mainMenuBtn.addEventListener("click", () => {
   slideCentre(quizContainer);
   quizPreferences.style.visibility = "hidden";
   slideRight(quizPreferences);
+  reviewQuestionsContainer.innerHTML = "";
 
   resetPlayerPreferences();
 });
@@ -161,6 +169,7 @@ retryBtn.addEventListener("click", () => {
   slideCentre(quizPreferences);
   removeElement(quizContainer);
   slideCentre(quizContainer);
+  reviewQuestionsContainer.innerHTML = "";
 });
 reviewQuestionsBtn.addEventListener("click", () => {
   modalReview.classList.add("modal__appear");
@@ -374,10 +383,23 @@ function getRandomQuestion(chosenTables) {
   questionChoices[pickRandomQuestion](chosenTables);
 }
 
-function checkAnswer(totalQuestions) {
+async function checkAnswer(totalQuestions) {
   saveQuestion();
   if (correctAnswer == userAnswer.innerText) {
+    tickAnimation.classList.toggle("drawn");
+    userAnswer.parentElement.style.backgroundColor = "green";
+    await new Promise((r) => setTimeout(r, 500));
+    userAnswer.parentElement.style.backgroundColor = "#c0cfec";
+    tickAnimation.classList.toggle("drawn");
     totalCorrectQuestions++;
+  } else {
+    userAnswer.parentElement.style.backgroundColor = "red";
+    crossAnimationNew.firstElementChild.style.opacity = "1";
+    crossAnimationNew2.classList.toggle("line");
+    await new Promise((r) => setTimeout(r, 500));
+    userAnswer.parentElement.style.backgroundColor = "#c0cfec";
+    crossAnimationNew2.classList.toggle("line");
+    crossAnimationNew.firstElementChild.style.opacity = "0";
   }
   if (currentQuestionNumber < totalQuestions) {
     currentQuestionNumber++;
@@ -410,7 +432,25 @@ function checkAnswer(totalQuestions) {
 }
 
 function saveQuestion() {
-  const currentQuestion = `<p>${firstNumber.innerText} ${symbol.innerText} ${secondNumber.innerText} = ${correctAnswer}</p>`;
+  const currentQuestion = `
+  <div>
+    <p class="review_question-number">${currentQuestionNumber}.</p>
+    <p class="review__first-number">${firstNumber.innerText}</p>
+    <p class="review__symbol">${symbol.innerText}</p>
+    <p class="review__second-number">${secondNumber.innerText}</p>
+    <p class="review__symbol">=</p>
+    <p class="review__answer-${
+      userAnswer.innerText == correctAnswer ? "correct" : "incorrect"
+    }">${userAnswer.innerText}</p>
+    <p class="review__answer-symbol-container">${
+      userAnswer.innerText == correctAnswer
+        ? '<img class="btn-icon review__answer-symbol" src="./icons/Correct-answer.svg" alt="" />'
+        : '<img class="btn-icon review__answer-symbol" src="./icons/Wrong-answer.svg" alt="" />'
+    }</p>
+    <p class="${
+      userAnswer.innerText != correctAnswer ? "review__correct-answer" : ""
+    }">${userAnswer.innerText != correctAnswer ? correctAnswer : ""}</p>
+  </div>`;
   reviewQuestionsContainer.innerHTML += currentQuestion;
 }
 
